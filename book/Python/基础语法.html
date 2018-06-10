@@ -1,0 +1,237 @@
+
+
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+  <title>基础语法 - python | 思谬雷神</title>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+</head>
+
+<body lang="zh-Hans">
+
+ <div style="width:300px;">目录</div>
+ <div style="width:auto">
+ 
+
+  <article>
+
+    
+    	基础语法
+    	<hr>
+    	<h1 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h1><p>Python中标识符的第一个字符必须是字母或者下划线<code>_</code>，其余部分可由字母、下划线或数字组成。标识符是<strong>大小写敏感</strong>的。在 Python 3中，非<code>ASCII</code>标识符也是允许的了。</p>
+<h1 id="保留字"><a href="#保留字" class="headerlink" title="保留字"></a>保留字</h1><p>即关键字，不能用作任何标识符名称，因为会发生歧义。Python标准库提供了一个<code>keyword</code>模块，输出当前版本所有的关键字。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> keyword</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>keyword.kwlist</div><div class="line"></div><div class="line">[<span class="string">'False'</span>, <span class="string">'None'</span>, <span class="string">'True'</span>, <span class="string">'and'</span>, <span class="string">'as'</span>, <span class="string">'assert'</span>, <span class="string">'break'</span>, <span class="string">'class'</span>, <span class="string">'continue'</span>, <span class="string">'def'</span>, <span class="string">'del'</span>, <span class="string">'elif'</span>, <span class="string">'else'</span>, <span class="string">'except'</span>, <span class="string">'finally'</span>, <span class="string">'for'</span>, <span class="string">'from'</span>, <span class="string">'global'</span>, <span class="string">'if'</span>, <span class="string">'import'</span>, <span class="string">'in'</span>, <span class="string">'is'</span>, <span class="string">'lambda'</span>, <span class="string">'nonlocal'</span>, <span class="string">'not'</span>, <span class="string">'or'</span>, <span class="string">'pass'</span>, <span class="string">'raise'</span>, <span class="string">'return'</span>, <span class="string">'try'</span>, <span class="string">'while'</span>, <span class="string">'with'</span>, <span class="string">'yield'</span>]</div></pre></td></tr></table></figure>
+<h1 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h1><p>单行注释以<code>#</code>开头，比如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 第一个注释</span></div><div class="line"></div><div class="line">print(<span class="string">"Hello, Python!"</span>) <span class="comment"># 第二个注释</span></div></pre></td></tr></table></figure>
+<p>多行注释可以使用多个<code>#</code>，或者<code>&#39;&#39;&#39;</code>和<code>&quot;&quot;&quot;</code>。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 我是多行</span></div><div class="line"><span class="comment"># 注释</span></div><div class="line"></div><div class="line"><span class="string">'''</span></div><div class="line">我也是多行</div><div class="line">注释</div><div class="line">'''</div><div class="line"></div><div class="line"><span class="string">"""</span></div><div class="line">我也是多行注释</div><div class="line">Me too</div><div class="line">"""</div><div class="line"></div><div class="line">print(<span class="string">"Hello, Python!"</span>) <span class="comment"># 第二个注释</span></div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h1 id="行与缩进"><a href="#行与缩进" class="headerlink" title="行与缩进"></a>行与缩进</h1><p>与C++等使用<code>{}</code>包含代码块不同，Python最具特色的就是使用缩进来表示代码块。缩进的空格数是可设置的，但是同一个代码块的语句必须包含相同的缩进空格数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> <span class="keyword">True</span>:</div><div class="line">    print(<span class="string">'true'</span>)</div><div class="line"><span class="keyword">else</span>:</div><div class="line">    print(<span class="string">'false'</span>)</div><div class="line"><span class="comment">#      print('something...')</span></div></pre></td></tr></table></figure>
+<p>去掉上述代码最后一行的注释将会出现错误。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">IndentationError: unexpected indent(错误缩进)</div></pre></td></tr></table></figure>
+<h1 id="多行语句"><a href="#多行语句" class="headerlink" title="多行语句"></a>多行语句</h1><p>通常一条语句一行写完，但如果语句过长，可以使用反斜杠来书写多行语句。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">a=<span class="number">1</span>;b=<span class="number">2</span>;c=<span class="number">3</span></div><div class="line"></div><div class="line">d=a+\</div><div class="line">    b+\</div><div class="line">    c</div><div class="line"></div><div class="line">print(d) <span class="comment"># 输出 6</span></div></pre></td></tr></table></figure></p>
+<p>另外，<code>[] {}</code>或<code>()</code>中的多行语句，不需要使用反斜杠。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">all=[<span class="string">'a'</span>,<span class="string">'b'</span>,</div><div class="line">     <span class="string">'c'</span>,<span class="string">'d'</span>]</div></pre></td></tr></table></figure>
+<p>Python可以在同一行输入多个语句，语句间使用分号间隔。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a=<span class="number">1</span>;b=<span class="number">2</span>;c=<span class="number">3</span></div></pre></td></tr></table></figure>
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><p>Python中数字有四种类型：整数、长整数、浮点数和复数。</p>
+<ul>
+<li><strong>int</strong>(整数)，100</li>
+<li><strong>long</strong>(长整数)，比较大的整数</li>
+<li><strong>float</strong>(浮点数)，3.1415</li>
+<li><strong>complex</strong>(复数)，如1+2j</li>
+</ul>
+<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><p>Python使用单引号或双引号表示字符串，两者完全相同。使用三引号可指定一个多行字符串。字符串是不可变的。</p>
+<p>使用转义符<code>\</code>表示特殊字符，比如<code>\n</code>换行。通过在字符串前加r或R，可阻止转义，比如r”a fox jump over there \n”会显示<code>\n</code>，而不是换行。</p>
+<p>python允许处理unicode字符串，加前缀u或U， 如 u”this is an unicode string”。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">string1=<span class="string">'单引号字符串'</span></div><div class="line">string2=<span class="string">"双引号字符串"</span></div><div class="line">string3=<span class="string">"""这是一个</span></div><div class="line">多行字符串""" <span class="comment"># 相当于 '这是一个\n多行字符串'</span></div></pre></td></tr></table></figure>
+<h1 id="空行"><a href="#空行" class="headerlink" title="空行"></a>空行</h1><p>函数之间或类的方法之间用空行分隔，表示一段新的代码的开始。类和函数入口之间也用一行空行分隔，以突出函数入口的开始。空行与代码缩进不同，空行并不是Python语法的一部分。书写时不插入空行，Python解释器运行也不会出错。但是空行的作用在于分隔两段不同功能或含义的代码，便于日后代码的维护或重构。</p>
+<h1 id="命令行输入输出"><a href="#命令行输入输出" class="headerlink" title="命令行输入输出"></a>命令行输入输出</h1><p>如果要用户输入一个字符或其它参数，使用<code>input()</code>函数。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">a=<span class="string">'Hello'</span></div><div class="line">b=input(<span class="string">'请输入你的名字'</span>)</div><div class="line">print(a+<span class="string">' '</span>+b+<span class="string">'!'</span>)</div></pre></td></tr></table></figure></p>
+<p>使用<code>print</code>输出，它默认是换行的，要实现不换行需要在末尾加上<code>end=&quot;&quot;</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">x=<span class="string">"a"</span></div><div class="line">y=<span class="string">"b"</span></div><div class="line"><span class="comment"># 换行输出 相当于默认添加 end="\n"</span></div><div class="line">print( x )</div><div class="line">print( y )</div><div class="line"></div><div class="line">print(<span class="string">'---------'</span>)</div><div class="line"><span class="comment"># 不换行输出</span></div><div class="line">print( x, end=<span class="string">" "</span> )</div><div class="line">print( y, end=<span class="string">" "</span> )</div><div class="line">print()</div></pre></td></tr></table></figure>
+<p>以上示例执行结果为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">a</div><div class="line">b</div><div class="line">---------</div><div class="line">a b</div></pre></td></tr></table></figure>
+<h1 id="代码组"><a href="#代码组" class="headerlink" title="代码组"></a>代码组</h1><p>缩进相同的一组语句构成一个代码块，称为代码组。比如<code>if、while、def</code>和<code>class</code>这样的复合语句，首行以关键字开始，以冒号( : ) 结束，该行之后的一行或多行代码构成代码组。</p>
+<p>将首行及后面的代码组称为一个子句(clause)。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> expression : </div><div class="line">   suite</div><div class="line"><span class="keyword">elif</span> expression : </div><div class="line">   suite </div><div class="line"><span class="keyword">else</span> : </div><div class="line">   suite</div></pre></td></tr></table></figure>
+<h1 id="导入模块"><a href="#导入模块" class="headerlink" title="导入模块"></a>导入模块</h1><p>使用<code>import</code>或者<code>from...import</code>来导入相应的模块或者函数。</p>
+<ul>
+<li><code>import somemodule</code> 导入整个模块</li>
+<li><code>from somemodule import somefunction</code> 导入某个模块中的某个函数</li>
+<li><code>from somemodule import firstfunc, secondfunc, thirdfunc</code> 导入某个模块中的多个函数</li>
+<li><code>from somemodule import *</code> 导入某个模块中的全部函数</li>
+</ul>
+<blockquote>
+<p>导入<code>sys</code>模块<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys</div><div class="line">print(<span class="string">'================导入 Python 模块=========================='</span>);</div><div class="line"><span class="keyword">print</span> (<span class="string">'命令行参数为:'</span>)</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> sys.argv:</div><div class="line">    <span class="keyword">print</span> (i)</div><div class="line"><span class="keyword">print</span> (<span class="string">'\n python 路径为'</span>,sys.path)</div></pre></td></tr></table></figure></p>
+<p>导入 sys 模块的 argv,path 成员<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sys <span class="keyword">import</span> argv,path  <span class="comment">#  导入特定的成员</span></div><div class="line"> </div><div class="line">print(<span class="string">'================导入 Python 函数==================================='</span>)</div><div class="line">print(<span class="string">'path:'</span>,path) <span class="comment"># 因为已经导入path成员，所以此处引用时不需要加sys.path</span></div></pre></td></tr></table></figure></p>
+</blockquote>
+
+    
+
+
+ </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        },
+        "HTML-CSS":{
+        	scale: 85
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

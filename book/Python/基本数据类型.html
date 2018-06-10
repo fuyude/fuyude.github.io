@@ -1,0 +1,348 @@
+
+
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+  <title>基本数据类型 - python | 思谬雷神</title>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+</head>
+
+<body lang="zh-Hans">
+
+ <div style="width:300px;">目录</div>
+ <div style="width:auto">
+ 
+
+  <article>
+
+    
+    	基本数据类型
+    	<hr>
+    	<h1 id="变量声明和赋值"><a href="#变量声明和赋值" class="headerlink" title="变量声明和赋值"></a>变量声明和赋值</h1><p>Python中的变量不需要声明。每个变量在使用前都必须赋值，赋值后该变量才会被真正创建。在Python中变量没有类型，所谓“类型”指的是变量在内存中的类型。</p>
+<p>使用等号(=)给变量赋值，等号左边是一个变量名，右边是存储在变量中的值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">radius=<span class="number">1</span>                  <span class="comment"># 整型变量</span></div><div class="line">pi=<span class="number">3.1415</span>                <span class="comment"># 浮点型变量</span></div><div class="line">name=<span class="string">"Area"</span>           <span class="comment"># 字符串变量</span></div><div class="line"></div><div class="line">print(name+<span class="string">" is"</span>,end=<span class="string">" "</span>)</div><div class="line">print(pi*radius*radius,end=<span class="string">"."</span>)</div></pre></td></tr></table></figure>
+<p>输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Area is 3.1415.</div></pre></td></tr></table></figure></p>
+<p>Python中可同时为多个变量赋值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a=b=c=<span class="number">1</span></div></pre></td></tr></table></figure>
+<p>上述语句创建一个整型对象，1，三个变量被分配到相同的内存空间上。</p>
+<p>也可以为多个对象指定多个变量。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">radius,pi,name=<span class="number">1</span> ,<span class="number">3.1415</span>,<span class="string">'Area'</span></div></pre></td></tr></table></figure>
+<p>上述语句创建三个变量，整型对象1分配给radius，浮点型对象3.1415分配给pi，字符串’Area’分配给name。</p>
+<h1 id="标准数据类型"><a href="#标准数据类型" class="headerlink" title="标准数据类型"></a>标准数据类型</h1><p>Python 3中的标准数据类型包括6个：</p>
+<ul>
+<li>Number 数字</li>
+<li>String 字符串</li>
+<li>List 列表</li>
+<li>Tuple 元组</li>
+<li>Sets 集合</li>
+<li>Dictionary 字典</li>
+</ul>
+<h2 id="Number-数字"><a href="#Number-数字" class="headerlink" title="Number 数字"></a>Number 数字</h2><p>数字包括四种类型<strong>int、float、bool、complex</strong>。比较有特色的是直接支持<strong>复数</strong>类型。在Python 3 中只有一种整数类型int，表示长整型，不再包含以前版本的Long类型。</p>
+<p>数值类型的赋值和计算和其它语言类似。使用内置函数<code>type()</code>可查询变量所指对象的类型。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>radius,pi,isTure,com=<span class="number">1</span> ,<span class="number">3.1415</span>,<span class="keyword">True</span>,<span class="number">4</span>+<span class="number">3j</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>print(type(radius),type(pi),type(isTure),type(com))</div><div class="line"></div><div class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">int</span>'&gt; &lt;<span class="title">class</span> '<span class="title">float</span>'&gt; &lt;<span class="title">class</span> '<span class="title">bool</span>'&gt; &lt;<span class="title">class</span> '<span class="title">complex</span>'&gt;</span></div></pre></td></tr></table></figure>
+<p>还可以用 isinstance 来判断：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>radius,pi,isTure,com=<span class="number">1</span> ,<span class="number">3.1415</span>,<span class="keyword">True</span>,<span class="number">4</span>+<span class="number">3j</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(pi,int)</div><div class="line"><span class="keyword">False</span></div></pre></td></tr></table></figure>
+<p>isinstance 和 type 的区别在于：</p>
+<ul>
+<li>type()不会认为子类是一种父类类型。</li>
+<li>isinstance()会认为子类是一种父类类型。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">(A)</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line"></div><div class="line">isinstance(A(), A)  <span class="comment"># returns True</span></div><div class="line">type(A()) == A      <span class="comment"># returns True</span></div><div class="line">isinstance(B(), A)    <span class="comment"># returns True</span></div><div class="line">type(B()) == A        <span class="comment"># returns False</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意</strong>：在 Python2 中是没有布尔型的，它用数字 0 表示 False，用 1 表示 True。到 Python3 中，把 True 和 False 定义成关键字了，但它们的值还是 1 和 0，它们可以和数字相加。</p>
+</blockquote>
+<p>当给一个变量指定了数值后，即创建了Number对象，可以使用<code>del</code>语句删除一些对象引用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">del</span> var1[,var2[,var3[....,varN]]]]</div></pre></td></tr></table></figure>
+<p>比如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">radius,pi,isTure,com=<span class="number">1</span> ,<span class="number">3.1415</span>,<span class="keyword">True</span>,<span class="number">4</span>+<span class="number">3j</span></div><div class="line"><span class="keyword">del</span> radius</div><div class="line"><span class="keyword">del</span> pi,isTure,com</div></pre></td></tr></table></figure>
+<p><strong>数值计算示例</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">1</span>+<span class="number">2</span> <span class="comment"># 加法</span></div><div class="line"><span class="number">3</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">2.1</span><span class="number">-1</span> <span class="comment">#减法</span></div><div class="line"><span class="number">1.1</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">2</span>*<span class="number">5</span> <span class="comment">#乘法</span></div><div class="line"><span class="number">10</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">1</span>/<span class="number">2</span> <span class="comment">#除法，浮点数</span></div><div class="line"><span class="number">0.5</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">1</span>//<span class="number">2</span> <span class="comment">#除法，整数</span></div><div class="line"><span class="number">0</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">10</span>%<span class="number">3</span> <span class="comment">#取余</span></div><div class="line"><span class="number">1</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">2</span>**<span class="number">5</span> <span class="comment">#乘方</span></div><div class="line"><span class="number">32</span></div></pre></td></tr></table></figure>
+<p><strong>注意：</strong></p>
+<ol>
+<li>变量可以通过赋值指向不同类型的对象。</li>
+<li>整数的除法总是返回一个浮点数，要获取整数要是用<code>//</code>运算符。</li>
+<li>混合计算时，总是把整型数值转换为浮点数。</li>
+</ol>
+<h2 id="String-字符串"><a href="#String-字符串" class="headerlink" title="String 字符串"></a>String 字符串</h2><p>Python中的字符串用单引号(‘)或双引号(“)括起来，同时使用反斜杠()转义特殊字符。</p>
+<p>字符串的截取的语法格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">变量[头下标:尾下标]</div></pre></td></tr></table></figure>
+<p>索引值以 0 为开始值，-1 为从末尾的开始位置。加号 (+) 是字符串的连接符， 星号 (*) 表示复制当前字符串，紧跟的数字为复制的次数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">str = <span class="string">'Python'</span></div><div class="line"> </div><div class="line"><span class="keyword">print</span> (str)          <span class="comment"># 输出字符串</span></div><div class="line"><span class="keyword">print</span> (str[<span class="number">0</span>:<span class="number">-1</span>])    <span class="comment"># 输出第一个到倒数第二个的所有字符</span></div><div class="line"><span class="keyword">print</span> (str[<span class="number">0</span>])       <span class="comment"># 输出字符串第一个字符</span></div><div class="line"><span class="keyword">print</span> (str[<span class="number">2</span>:<span class="number">5</span>])     <span class="comment"># 输出从第三个开始到第五个的字符</span></div><div class="line"><span class="keyword">print</span> (str[<span class="number">2</span>:])      <span class="comment"># 输出从第三个开始的后的所有字符</span></div><div class="line"><span class="keyword">print</span> (str * <span class="number">2</span>)      <span class="comment"># 输出字符串两次</span></div><div class="line"><span class="keyword">print</span> (str + <span class="string">"TEST"</span>) <span class="comment"># 连接字符串</span></div></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Python</div><div class="line">Pytho</div><div class="line">P</div><div class="line">tho</div><div class="line">thon</div><div class="line">PythonPython</div><div class="line">PythonTEST</div></pre></td></tr></table></figure>
+<p>Python使用反斜杠<code>\</code>转义特殊字符，如果你不想让反斜杠发生转义，可以在字符串前面添加一个 <code>r或R</code>，表示原始字符串：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">'pytho\n 3'</span>)</div><div class="line">pytho</div><div class="line"> <span class="number">3</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">r'pytho\n 3'</span>)</div><div class="line">pytho\n <span class="number">3</span></div></pre></td></tr></table></figure>
+<p>另外，反斜杠<code>\</code>可以作为续行符，表示下一行是上一行的延续。也可以使用 <code>&quot;&quot;&quot;...&quot;&quot;&quot;</code> 或者 <code>&#39;&#39;&#39;...&#39;&#39;&#39;</code>跨越多行。注意，<strong>Python 没有单独的字符类型</strong>，一个字符就是长度为1的字符串。</p>
+<p>与<code>C</code>字符串不同的是，<code>Python</code><strong>字符串不能被改变</strong>。向一个索引位置赋值，比如<code>string[0] = &#39;s&#39;</code>会导致错误。</p>
+<h2 id="List-列表"><a href="#List-列表" class="headerlink" title="List 列表"></a>List 列表</h2><p>列表是写在方括号<code>[]</code>之间，用逗号分隔的元素列表。</p>
+<p>列表是Python中使用最频繁的数据类型。它可以完成大多数集合类数据结构。列表中元素的类型可以不相同，支持数字、字符串或者列表(嵌套)。和字符串一样，列表同样可以被索引和截取。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">变量[头下标:尾下标]</div></pre></td></tr></table></figure>
+<p>同字符串一样，索引值以 0 为开始值，-1 为从末尾的开始位置。加号（+）是列表连接运算符，星号（*）是重复操作。</p>
+<blockquote>
+<p>列表示例<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">list = [ <span class="string">'abcd'</span>, <span class="number">123</span> , <span class="number">4.56</span>, <span class="string">'python'</span>, <span class="number">7.8</span> ]</div><div class="line">tinylist = [<span class="number">910</span>, <span class="string">'python3'</span>]</div><div class="line"> </div><div class="line"><span class="keyword">print</span> (list)            <span class="comment"># 输出完整列表</span></div><div class="line"><span class="keyword">print</span> (list[<span class="number">0</span>])         <span class="comment"># 输出列表第一个元素</span></div><div class="line"><span class="keyword">print</span> (list[<span class="number">1</span>:<span class="number">3</span>])       <span class="comment"># 从第二个开始输出到第三个元素 [123, 4.56] #注意此处，只输出了两个元素</span></div><div class="line"><span class="keyword">print</span> (list[<span class="number">2</span>:])        <span class="comment"># 输出从第三个元素开始的所有元素</span></div><div class="line"><span class="keyword">print</span> (tinylist * <span class="number">2</span>)    <span class="comment"># 输出两次列表</span></div><div class="line"><span class="keyword">print</span> (list + tinylist) <span class="comment"># 连接列表</span></div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>输出结果为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[&apos;abcd&apos;, 123, 4.56, &apos;python&apos;, 7.8]</div><div class="line">abcd</div><div class="line">[123, 4.56]</div><div class="line">[4.56, &apos;python&apos;, 7.8]</div><div class="line">[910, &apos;python3&apos;, 910, &apos;python3&apos;]</div><div class="line">[&apos;abcd&apos;, 123, 4.56, &apos;python&apos;, 7.8, 910, &apos;python3&apos;]</div></pre></td></tr></table></figure></p>
+<p>与字符串不同，列表中的元素是可以改变的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">list = [ <span class="string">'abcd'</span>, <span class="number">123</span> , <span class="number">4.56</span>, <span class="string">'python'</span>, <span class="number">7.8</span> ]</div><div class="line"></div><div class="line">list[<span class="number">0</span>]=<span class="number">9</span> <span class="comment">#字符串替换为数字</span></div><div class="line">list[<span class="number">1</span>:<span class="number">3</span>]=[] <span class="comment">#改为空</span></div><div class="line">print(list)  <span class="comment"># 输出 [9, 'python', 7.8]</span></div></pre></td></tr></table></figure>
+<h2 id="Tuple-元组"><a href="#Tuple-元组" class="headerlink" title="Tuple 元组"></a>Tuple 元组</h2><p>元组与列表类似，元素类型可以不同，但其中的元素不能修改。元组用小括号<code>()</code>表示，元素之间用逗号隔开。</p>
+<blockquote>
+<p>元组示例<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">tuple = ( <span class="string">'abcd'</span>, <span class="number">123</span> , <span class="number">4.56</span>, <span class="string">'python'</span>, <span class="number">7.8</span> )</div><div class="line">tinytuple = (<span class="number">910</span>, <span class="string">'python3'</span>)</div><div class="line"> </div><div class="line"><span class="keyword">print</span> (tuple)            <span class="comment"># 输出完整列表</span></div><div class="line"><span class="keyword">print</span> (tuple[<span class="number">0</span>])         <span class="comment"># 输出列表第一个元素</span></div><div class="line"><span class="keyword">print</span> (tuple[<span class="number">1</span>:<span class="number">3</span>])       <span class="comment"># 从第二个开始输出到第三个元素 [123, 4.56] #注意此处，只输出了两个元素</span></div><div class="line"><span class="keyword">print</span> (tuple[<span class="number">2</span>:])        <span class="comment"># 输出从第三个元素开始的所有元素</span></div><div class="line"><span class="keyword">print</span> (tinytuple * <span class="number">2</span>)    <span class="comment"># 输出两次列表</span></div><div class="line"><span class="keyword">print</span> (tuple + tinytuple) <span class="comment"># 连接列表</span></div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>输出为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(&apos;abcd&apos;, 123, 4.56, &apos;python&apos;, 7.8)</div><div class="line">abcd</div><div class="line">(123, 4.56)</div><div class="line">(4.56, &apos;python&apos;, 7.8)</div><div class="line">(910, &apos;python3&apos;, 910, &apos;python3&apos;)</div><div class="line">(&apos;abcd&apos;, 123, 4.56, &apos;python&apos;, 7.8, 910, &apos;python3&apos;)</div></pre></td></tr></table></figure></p>
+<p>元组与字符串类似，可以被索引且下标索引从0开始，-1 为从末尾开始的位置。也可以进行截取。可以把字符串看作一种特殊的元组。</p>
+<p>虽然元组元素不可改变，但它可以包含可变对象，比如list列表。</p>
+<p>构造包含 0 个或 1 个元素的元组比较特殊，所以有一些额外的语法规则：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">tup1 = ()    <span class="comment"># 空元组</span></div><div class="line">tup2 = (<span class="number">20</span>,) <span class="comment"># 一个元素，需要在元素后添加逗号</span></div></pre></td></tr></table></figure>
+<p><strong>string、list和tuple都属于sequence（序列）。</strong></p>
+<h2 id="Set-集合"><a href="#Set-集合" class="headerlink" title="Set 集合"></a>Set 集合</h2><p>集合是<strong>无序</strong>不重复元素序列。基本功能包括成员关系测试和删除重复元素。可以使用大括号 <code>{ }</code> 或者 <code>set()</code> 函数创建集合，注意：创建一个空集合必须用 <code>set()</code> 而不是 <code>{ }</code>，因为 <code>{ }</code> 是用来创建一个空字典。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">parame = &#123;value01,value02,...&#125;</div><div class="line">或者</div><div class="line">set(value)</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">province=&#123;<span class="string">'Tianjin'</span>,<span class="string">'Beijing'</span>,<span class="string">'Shanghai'</span>,<span class="string">'Xian'</span>,<span class="string">'Tianjin'</span>&#125;</div><div class="line">print(province);</div><div class="line"></div><div class="line"><span class="comment"># 成员测试</span></div><div class="line"><span class="keyword">if</span>(<span class="string">'Beijing'</span> <span class="keyword">in</span> province):</div><div class="line">    print(<span class="string">'Beijing 在集合中'</span>)</div><div class="line"><span class="keyword">else</span>:</div><div class="line">    print(<span class="string">'Beijing 不在集合中'</span>)</div><div class="line"></div><div class="line"><span class="comment"># 进行集合运算</span></div><div class="line">a = set(<span class="string">'abracadabra'</span>)</div><div class="line">b = set(<span class="string">'alacazam'</span>)</div><div class="line"></div><div class="line">print(a) </div><div class="line">print(a - b)     <span class="comment"># a和b的差集 </span></div><div class="line">print(a | b)     <span class="comment"># a和b的并集 </span></div><div class="line">print(a &amp; b)     <span class="comment"># a和b的交集 </span></div><div class="line">print(a ^ b)     <span class="comment"># a和b中不同时存在的元素</span></div></pre></td></tr></table></figure>
+<p>输出结果为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;&apos;Shanghai&apos;, &apos;Xian&apos;, &apos;Beijing&apos;, &apos;Tianjin&apos;&#125;</div><div class="line">Beijing 在集合中</div><div class="line">&#123;&apos;a&apos;, &apos;r&apos;, &apos;d&apos;, &apos;b&apos;, &apos;c&apos;&#125;</div><div class="line">&#123;&apos;d&apos;, &apos;r&apos;, &apos;b&apos;&#125;</div><div class="line">&#123;&apos;a&apos;, &apos;r&apos;, &apos;m&apos;, &apos;z&apos;, &apos;l&apos;, &apos;d&apos;, &apos;b&apos;, &apos;c&apos;&#125;</div><div class="line">&#123;&apos;a&apos;, &apos;c&apos;&#125;</div><div class="line">&#123;&apos;z&apos;, &apos;l&apos;, &apos;d&apos;, &apos;b&apos;, &apos;r&apos;, &apos;m&apos;&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="Dictionary-字典"><a href="#Dictionary-字典" class="headerlink" title="Dictionary 字典"></a>Dictionary 字典</h2><p>字典是无序的对象集合。列表是有序的对象集合。它们的区别在于：字典中的元素是通过键来存取的，而不是通过偏移存取。字典是一种映射类型，用<code>{}</code>标识，它是一个无序的<strong>键(key):值(value)</strong>对集合。</p>
+<p>键(key)必须使用不可变类型。在同一字典中键(key)必须是唯一的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">dictionary1=&#123;&#125;</div><div class="line">dictionary1[<span class="number">1</span>]=<span class="string">"1- Hello"</span></div><div class="line">dictionary1[<span class="string">'a'</span>]=<span class="string">"2- Python"</span></div><div class="line"></div><div class="line">dictionary2=&#123;<span class="string">'sex'</span>:<span class="string">'male'</span>,<span class="string">'age'</span>:<span class="number">5</span>,<span class="string">'name'</span>:<span class="string">'Lgy'</span>&#125;</div><div class="line"></div><div class="line">print(dictionary1[<span class="number">1</span>],dictionary1[<span class="string">'a'</span>])</div><div class="line"></div><div class="line">print(dictionary2) <span class="comment"># 输出完整的字典</span></div><div class="line">print(dictionary2.keys()) <span class="comment"># 输出所有键</span></div><div class="line">print(dictionary2.values()) <span class="comment"># 输出所有值</span></div></pre></td></tr></table></figure>
+<p>输出结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1- Hello 2- Python</div><div class="line">&#123;&apos;sex&apos;: &apos;male&apos;, &apos;age&apos;: 5, &apos;name&apos;: &apos;Lgy&apos;&#125;</div><div class="line">dict_keys([&apos;sex&apos;, &apos;age&apos;, &apos;name&apos;])</div><div class="line">dict_values([&apos;male&apos;, 5, &apos;Lgy&apos;])</div></pre></td></tr></table></figure>
+<p>字典构造函数<code>dict()</code>可以直接从键值对构建字典。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>dict([(<span class="string">'sex'</span>,<span class="string">'male'</span>),(<span class="string">'age'</span>,<span class="number">5</span>),(<span class="string">'name'</span>,<span class="string">'Lgy'</span>)])</div><div class="line">&#123;<span class="string">'sex'</span>: <span class="string">'male'</span>, <span class="string">'age'</span>: <span class="number">5</span>, <span class="string">'name'</span>: <span class="string">'Lgy'</span>&#125;</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;x:x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span>(<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)&#125;</div><div class="line">&#123;<span class="number">2</span>: <span class="number">4</span>, <span class="number">3</span>: <span class="number">9</span>, <span class="number">4</span>: <span class="number">16</span>&#125;</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>dict(sex=<span class="string">'male'</span>,range=<span class="number">5</span>,name=<span class="string">'Lgy'</span>)</div><div class="line">&#123;<span class="string">'sex'</span>: <span class="string">'male'</span>, <span class="string">'range'</span>: <span class="number">5</span>, <span class="string">'name'</span>: <span class="string">'Lgy'</span>&#125;</div></pre></td></tr></table></figure>
+<h1 id="数据类型转换"><a href="#数据类型转换" class="headerlink" title="数据类型转换"></a>数据类型转换</h1><p>有时需要对数据类型进行转换，只需将数据类型作为函数名即可。以下几个内置函数可以执行数据类型之间的转换。这些函数返回一个新的对象，表示转换的值。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">int(x [,base])</td>
+<td>将x转换为一个整数</td>
+</tr>
+<tr>
+<td style="text-align:center">float(x)</td>
+<td>将x转换到一个浮点数</td>
+</tr>
+<tr>
+<td style="text-align:center">complex(real [,imag])</td>
+<td>创建一个复数</td>
+</tr>
+<tr>
+<td style="text-align:center">str(x)</td>
+<td>将对象 x 转换为字符串</td>
+</tr>
+<tr>
+<td style="text-align:center">repr(x)</td>
+<td>将对象 x 转换为表达式字符串</td>
+</tr>
+<tr>
+<td style="text-align:center">eval(str)</td>
+<td>用来计算在字符串中的有效Python表达式,并返回一个对象</td>
+</tr>
+<tr>
+<td style="text-align:center">tuple(s)</td>
+<td>将序列 s 转换为一个元组</td>
+</tr>
+<tr>
+<td style="text-align:center">list(s)</td>
+<td>将序列 s 转换为一个列表</td>
+</tr>
+<tr>
+<td style="text-align:center">set(s)</td>
+<td>转换为可变集合</td>
+</tr>
+<tr>
+<td style="text-align:center">dict(d)</td>
+<td>创建一个字典。d 必须是一个序列 (key,value)元组。</td>
+</tr>
+<tr>
+<td style="text-align:center">frozenset(s)</td>
+<td>转换为不可变集合</td>
+</tr>
+<tr>
+<td style="text-align:center">chr(x)</td>
+<td>将一个整数转换为一个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">ord(x)</td>
+<td>将一个字符转换为它的整数值</td>
+</tr>
+<tr>
+<td style="text-align:center">hex(x)</td>
+<td>将一个整数转换为一个十六进制字符串</td>
+</tr>
+<tr>
+<td style="text-align:center">oct(x)</td>
+<td>将一个整数转换为一个八进制字符串</td>
+</tr>
+</tbody>
+</table>
+
+    
+
+
+ </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        },
+        "HTML-CSS":{
+        	scale: 85
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

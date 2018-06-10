@@ -1,0 +1,1079 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="教程,autodyn,简介," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="autodyn简介autodyn是由美国的Century Dynamics公司于1985年发行的一个商业通用流体动力学有限元计算软件。它是为瞬时非线性动力学设计的，集合了前后处理和计算，特别适用于爆炸、冲击和侵彻方面的计算。可运行于个人计算机、工作站和大型计算机。  如上图，autodyn可计算破片战斗部、动能侵彻混凝土、液压、建筑物爆炸冲击、爆炸-结构耦合、成型弹丸入水、爆炸成型弹丸、子弹撞击、">
+<meta name="keywords" content="教程,autodyn,简介">
+<meta property="og:type" content="article">
+<meta property="og:title" content="autodyn基础教程-简介">
+<meta property="og:url" content="http://www.liguyu.com/autodyn/autodyn基础教程-简介.html">
+<meta property="og:site_name" content="思谬雷神">
+<meta property="og:description" content="autodyn简介autodyn是由美国的Century Dynamics公司于1985年发行的一个商业通用流体动力学有限元计算软件。它是为瞬时非线性动力学设计的，集合了前后处理和计算，特别适用于爆炸、冲击和侵彻方面的计算。可运行于个人计算机、工作站和大型计算机。  如上图，autodyn可计算破片战斗部、动能侵彻混凝土、液压、建筑物爆炸冲击、爆炸-结构耦合、成型弹丸入水、爆炸成型弹丸、子弹撞击、">
+<meta property="og:image" content="http://or2avyamu.bkt.clouddn.com/2017/06/06/d39a17493195126e0ce800c262e93653.JPG">
+<meta property="og:image" content="http://or2avyamu.bkt.clouddn.com/2017/06/08/c812f54b1f444ab459f2e6899d9ca074.png">
+<meta property="og:image" content="http://or2avyamu.bkt.clouddn.com/2017/06/08/649d37777ad0b4a20b65b518637218ce.png">
+<meta property="og:image" content="http://or2avyamu.bkt.clouddn.com/2017/06/08/e3da8ff244ab6b148d7cd0bd86222809.png">
+<meta property="og:image" content="http://or2avyamu.bkt.clouddn.com/2017/06/08/6f7d48a57392a8b8eedbb2840e6e7861.png">
+<meta property="og:image" content="http://or2avyamu.bkt.clouddn.com/2017/06/08/0927ce76fd3856dcc0325961228ec59b.png">
+<meta property="og:updated_time" content="2017-06-08T08:08:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="autodyn基础教程-简介">
+<meta name="twitter:description" content="autodyn简介autodyn是由美国的Century Dynamics公司于1985年发行的一个商业通用流体动力学有限元计算软件。它是为瞬时非线性动力学设计的，集合了前后处理和计算，特别适用于爆炸、冲击和侵彻方面的计算。可运行于个人计算机、工作站和大型计算机。  如上图，autodyn可计算破片战斗部、动能侵彻混凝土、液压、建筑物爆炸冲击、爆炸-结构耦合、成型弹丸入水、爆炸成型弹丸、子弹撞击、">
+<meta name="twitter:image" content="http://or2avyamu.bkt.clouddn.com/2017/06/06/d39a17493195126e0ce800c262e93653.JPG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.liguyu.com/autodyn/autodyn基础教程-简介.html"/>
+
+
+
+
+
+  <title>autodyn基础教程-简介 | 思谬雷神</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9381cbecd4d412f6d5de68d452e9d16d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">思谬雷神</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">好好学习、天天向上</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.liguyu.com/autodyn/autodyn基础教程-简介.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fuyude">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://or2avyamu.bkt.clouddn.com/2017/06/07/e78ce763be3dabdec1ba4934e1a4e09b.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="思谬雷神">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">autodyn基础教程-简介</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-06T14:07:12+08:00">
+                2017-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/autodyn/" itemprop="url" rel="index">
+                    <span itemprop="name">autodyn</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-bar-chart"></i> 已阅读
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计 </span>
+                
+                <span title="字数统计">
+                  1,558 个
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  约 6 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="autodyn简介"><a href="#autodyn简介" class="headerlink" title="autodyn简介"></a>autodyn简介</h2><p>autodyn是由美国的Century Dynamics公司于1985年发行的一个商业通用流体动力学有限元计算软件。它是为瞬时非线性动力学设计的，集合了前后处理和计算，特别适用于爆炸、冲击和侵彻方面的计算。可运行于个人计算机、工作站和大型计算机。</p>
+<p><img src="http://or2avyamu.bkt.clouddn.com/2017/06/06/d39a17493195126e0ce800c262e93653.JPG" alt="autodyn计算示例" title="autodyn计算示例"></p>
+<p>如上图，autodyn可计算破片战斗部、动能侵彻混凝土、液压、建筑物爆炸冲击、爆炸-结构耦合、成型弹丸入水、爆炸成型弹丸、子弹撞击、钢筋混凝土撞击、超高速撞击和发射器阶段分离等。<br><a id="more"></a></p>
+<blockquote>
+<p>固体金属碰撞的典型现象</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">速度</th>
+<th style="text-align:center">应变率</th>
+<th style="text-align:left">效应</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">$\lt 10^{-5}$</td>
+<td style="text-align:left">蠕变</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">$10^{-5} - 10^{-1}$</td>
+<td style="text-align:left">弹性</td>
+</tr>
+<tr>
+<td style="text-align:center">$\lt 50$</td>
+<td style="text-align:center">$10^{-1} - 10^{1}$</td>
+<td style="text-align:left">主要是弹性</td>
+</tr>
+<tr>
+<td style="text-align:center">$50-500$</td>
+<td style="text-align:center">$10^{1} - 10^{3}$</td>
+<td style="text-align:left">主要是塑性</td>
+</tr>
+<tr>
+<td style="text-align:center">$500-1000$</td>
+<td style="text-align:center">$10^{3} - 10^{5}$</td>
+<td style="text-align:left">局部塑性，材料强度起重要作用</td>
+</tr>
+<tr>
+<td style="text-align:center">$1000-3000$</td>
+<td style="text-align:center">$10^{5} - 10^{6}$</td>
+<td style="text-align:left">压力接近或者超过材料强度极限</td>
+</tr>
+<tr>
+<td style="text-align:center">$3000-12000$</td>
+<td style="text-align:center">$10^{6} - 10^{8}$</td>
+<td style="text-align:left">压力达到材料强度的数倍</td>
+</tr>
+<tr>
+<td style="text-align:center">$\gt 12000$</td>
+<td style="text-align:center">$\gt 10^{8}$</td>
+<td style="text-align:left">固体会因碰撞产生汽化现象</td>
+</tr>
+</tbody>
+</table>
+<p>低速撞击响应时间为$ms-s$，压力与材料屈服强度相当，产生全局形变，应变率$0.01-10s^{-1}$，应变在$0.5-10%$；而高速碰撞响应时间为$\mu s-ms$，压力可达10-100倍屈服强度，产生局部形变,应变率$\gt 10000s^{-1}$，应变$\gt 50%$。</p>
+<p>连续介质的运动由以下方程控制：</p>
+<ol>
+<li>质量守恒方程</li>
+<li>动量守恒方程</li>
+<li>能量守恒方程</li>
+<li>材料模型</li>
+<li>初始条件</li>
+<li>边界条件</li>
+</ol>
+<p>在Autodyn中通过显式时间积分或其他求解方法数值的求解。对于不同的求解器，这些控制方程是一致的。</p>
+<h2 id="材料模型"><a href="#材料模型" class="headerlink" title="材料模型"></a>材料模型</h2><h3 id="状态方程"><a href="#状态方程" class="headerlink" title="状态方程"></a>状态方程</h3><p>主要包括：</p>
+<ol>
+<li>线性 Linear</li>
+<li>Polynomial</li>
+<li>冲击 Shock</li>
+<li>Tillotson</li>
+<li>Puff</li>
+<li>SESAME</li>
+<li>两相 Two Phase</li>
+<li>理想气体 Ideal Gas</li>
+<li>JWL</li>
+<li>Lee-Tarver</li>
+<li>慢燃 Slow Burn</li>
+<li>Porous</li>
+<li>Compaction</li>
+<li>P alpha</li>
+<li>Ortho</li>
+<li>用户自定义 User #1</li>
+</ol>
+<h3 id="强度模型"><a href="#强度模型" class="headerlink" title="强度模型"></a>强度模型</h3><p>主要包括：</p>
+<ol>
+<li>None</li>
+<li>弹性 Elastic</li>
+<li>Viscoelastic</li>
+<li>von Mises</li>
+<li>Johnson Cook</li>
+<li>Piecewise JC</li>
+<li>Zerilli Armstrong</li>
+<li>Steinberg Guinan</li>
+<li>Drucker-Prager</li>
+<li>MO Granular</li>
+<li>Johnson-Holmquist</li>
+<li>RHT Concrete</li>
+<li>Beam-Resistance</li>
+<li>用户自定义 User Strength #1</li>
+</ol>
+<h3 id="失效模型"><a href="#失效模型" class="headerlink" title="失效模型"></a>失效模型</h3><p>主要包括：</p>
+<ol>
+<li>None</li>
+<li>Hydro（Pmin）</li>
+<li>Plastic Strain</li>
+<li>Principal Stress</li>
+<li>Principal Strain</li>
+<li>Principal Stress/Strain</li>
+<li>Material Stress</li>
+<li>Material Strain</li>
+<li>Material Stress/Strain</li>
+<li>Cummulative Damage</li>
+<li>Johnson Holmquist 2</li>
+<li>RHT Concrete </li>
+<li>Tsai/Hoffman/Hill</li>
+<li>Grady Spall Model</li>
+<li>Johnson Cook</li>
+<li>用户自定义 User failure # 1</li>
+</ol>
+<h2 id="求解器及其适用范围"><a href="#求解器及其适用范围" class="headerlink" title="求解器及其适用范围"></a>求解器及其适用范围</h2><p>autodyn求解器采用有限差分、有限体积、有限元和无网格法等算法。不同的求解器适用范围如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th>求解器</th>
+<th>可求解类型</th>
+<th>并行</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lagrange</td>
+<td>2D和3D</td>
+<td>3D并行</td>
+<td>可用于结构和非结构化网格</td>
+</tr>
+<tr>
+<td>ALE</td>
+<td>2D和3D</td>
+<td>3D并行</td>
+<td></td>
+</tr>
+<tr>
+<td>Shell/Membrane</td>
+<td>2D和3D</td>
+<td>3D并行</td>
+<td>可用于结构和非结构化网格</td>
+</tr>
+<tr>
+<td>Beam/Truss/Spring/Damper</td>
+<td>3D</td>
+<td>3D并行</td>
+<td>可用于结构和非结构化网格</td>
+</tr>
+<tr>
+<td>SPH</td>
+<td>2D和3D</td>
+<td>3D并行</td>
+<td></td>
+</tr>
+<tr>
+<td>Euler-FCT</td>
+<td>2D和3D</td>
+<td>3D并行</td>
+<td></td>
+</tr>
+<tr>
+<td>Multi-Material Euler</td>
+<td>2D和3D</td>
+<td>3D并行</td>
+<td></td>
+</tr>
+<tr>
+<td>Fill</td>
+<td>3D</td>
+<td></td>
+<td>二维Fills采用Lagrange Parts实现</td>
+</tr>
+</tbody>
+</table>
+<h2 id="离散"><a href="#离散" class="headerlink" title="离散"></a>离散</h2><p>在Autodyn中所有的数值方法都需要讲问题域离散为有限的更小、更简单的问题，这也是所有数值计算方法通用的要求。这个过程称为离散。</p>
+<p>通常控制方程需要在时间域和空间域进行离散化。对于时间域离散，除了欧拉子步(Euler sub-cycling)外，所有的求解器都是一样的。不同求解器的区别在于空间域离散，即求解问题的几何尺寸是如何定义和积分的。</p>
+<h3 id="时间离散"><a href="#时间离散" class="headerlink" title="时间离散"></a>时间离散</h3><p>数值计算的时间通常会被划分为成千上万个时间步。</p>
+<p>所有的Autodyn求解器采用显示时间积分。即变量的值是前一时间步的值与时间进行积分得到的，这种算法易于实现。</p>
+<p>但某些计算采用了隐式时间积分。变量的值是前一时间步的值与时间进行积分，并参考了当前时间步的估值，即采用预估-修正方法。这种算法实现起来比较复杂，而且计算耗时。</p>
+<p>对于波传播问题，为保证计算精度，两种方法所需的时间步长基本一致。</p>
+<h3 id="空间离散"><a href="#空间离散" class="headerlink" title="空间离散"></a>空间离散</h3><p>数值计算中，所求解模型需要在几何上划分为相连的离散单元，包括单元和粒子等。有两种基本的分割方法：</p>
+<ol>
+<li>Lagrangian - 基于物质，离散单元随着物质运动；</li>
+<li>Eulerian - 基于空间，离散单元固定在空间中。</li>
+</ol>
+<p>除了SPH之外，所有求解器都使用数字网格或单元离散几何模型。网格定义了一些节点、边或单元。相邻的单元由节点连接，且连接是固定的。根据求解器的不同，网格可以是结构或非结构化的。</p>
+<p>SPH是一种粒子算法，不同粒子与其它粒子通过差值函数连接，其连接是不固定的。</p>
+<p><img src="http://or2avyamu.bkt.clouddn.com/2017/06/08/c812f54b1f444ab459f2e6899d9ca074.png" alt="拉格朗日算法示意图" title="拉格朗日算法示意图"></p>
+<p>如上图所示，Lagrange是一种基于网格的拉格朗日算法。<br><img src="http://or2avyamu.bkt.clouddn.com/2017/06/08/649d37777ad0b4a20b65b518637218ce.png" alt="欧拉算法示意图" title="欧拉算法示意图"></p>
+<p>如上图所示，Euler是一种基于网格的欧拉算法。</p>
+<p><img src="http://or2avyamu.bkt.clouddn.com/2017/06/08/e3da8ff244ab6b148d7cd0bd86222809.png" alt="SPH算法示意图" title="SPH算法示意图"></p>
+<p>如上图所示，SPH是一种基于粒子的（无网格）拉格朗日算法。<br><img src="http://or2avyamu.bkt.clouddn.com/2017/06/08/6f7d48a57392a8b8eedbb2840e6e7861.png" alt="算法对比" title="算法对比"><br>上图为四种主要求解器所需网格的对比。</p>
+<h2 id="模型构建的一些概念"><a href="#模型构建的一些概念" class="headerlink" title="模型构建的一些概念"></a>模型构建的一些概念</h2><h3 id="Part-零件"><a href="#Part-零件" class="headerlink" title="Part - 零件"></a>Part - 零件</h3><p>Part是采用同一个求解器的节点和单元组合，用来进行基本的模型创建、求解和显示，同一类型求解器可包含多个Part。Part可以是结构或非结构网格。</p>
+<h3 id="Component-部件"><a href="#Component-部件" class="headerlink" title="Component - 部件"></a>Component - 部件</h3><p>Component是Part的集合，在计算时是可选的。一个部件可包含任意数量的Part及其组合。Component用来辅助模型构建和参数化，比如给多个零件加载速度、复制多个零件。</p>
+<h3 id="Model-模型"><a href="#Model-模型" class="headerlink" title="Model - 模型"></a>Model - 模型</h3><p>模型是参与计算的所有实体的集合。</p>
+<h3 id="复杂模型构建"><a href="#复杂模型构建" class="headerlink" title="复杂模型构建"></a>复杂模型构建</h3><p><img src="http://or2avyamu.bkt.clouddn.com/2017/06/08/0927ce76fd3856dcc0325961228ec59b.png" alt="耦合" title="耦合"><br>每个Autodyn算例可有多个零件。算例中不同零件通过连接(Joins)、Lagrange-Lagrange耦合、Euler-Lagrange耦合等算法相互作用。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div><b>您的支持将鼓励我继续创作！</b></div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赞赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wx.png" alt="fuyude WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/zfb.png" alt="fuyude Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+
+      
+    </div>
+
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:14px;padding-bottom:1em;">
+ --------------------------- 本文结束，谢谢阅读 ---------------------------
+</div> 
+<div style="border-bottom: 1px solid black;border-top: 1px solid black"> 
+  <div style="margin-left:10px;margin-right:10px"> 
+  <p style="text-align:center;font-weight:blod;margin:0px;color:red;">版权声明</p> 
+  <p style="text-indent:2em;margin:0px; font-size: 10px;line-height: 30px"> 由<a href="http://www.liguyu.com" style="color:#258FC6">fuyude</a>创作并维护的<a href="http://www.liguyu.com" style="color:#258FC6">思谬雷神</a>博客采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。本文首发于<a href="http://www.liguyu.com" style="color:#258FC6">思谬雷神</a> 博客，版权所有，侵权必究。</p>
+  <p style="text-indent:2em;margin:0px; font-size: 10px;line-height: 30px">需要本文涉及到的建模或计算文件，或<b>探讨相关计算问题</b>，请在下方留言或通过184596664#qq.com联系。</p>
+  <p style="text-indent:2em;margin:0px; font-size: 10px;line-height: 30px">如果本文对您有所帮助，欢迎转载或赏我一杯咖啡。</p>
+  <p style="text-indent:2em;margin:0px; font-size: 10px;line-height: 30px">本文首发于<a href='http://www.liguyu.com/autodyn/autodyn基础教程-简介.html'>http://www.liguyu.com/autodyn/autodyn基础教程-简介.html</a></p> 
+  </div> 
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/教程/" rel="tag"># 教程</a>
+          
+            <a href="/tags/autodyn/" rel="tag"># autodyn</a>
+          
+            <a href="/tags/简介/" rel="tag"># 简介</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/autodyn/autodyn实例.html" rel="next" title="autodyn实例">
+                <i class="fa fa-chevron-left"></i> autodyn实例
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/autodyn/autodyn基础教程-并行计算.html" rel="prev" title="autodyn基础教程-并行计算">
+                autodyn基础教程-并行计算 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNzAyMC8xMzU1Ng=="></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://or2avyamu.bkt.clouddn.com/2017/06/07/e78ce763be3dabdec1ba4934e1a4e09b.JPG"
+               alt="fuyude" />
+          <p class="site-author-name" itemprop="name">fuyude</p>
+           
+              <p class="site-description motion-element" itemprop="description">数值模拟实例、教程</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#autodyn简介"><span class="nav-number">1.</span> <span class="nav-text">autodyn简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#材料模型"><span class="nav-number">2.</span> <span class="nav-text">材料模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#状态方程"><span class="nav-number">2.1.</span> <span class="nav-text">状态方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#强度模型"><span class="nav-number">2.2.</span> <span class="nav-text">强度模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#失效模型"><span class="nav-number">2.3.</span> <span class="nav-text">失效模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#求解器及其适用范围"><span class="nav-number">3.</span> <span class="nav-text">求解器及其适用范围</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#离散"><span class="nav-number">4.</span> <span class="nav-text">离散</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#时间离散"><span class="nav-number">4.1.</span> <span class="nav-text">时间离散</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空间离散"><span class="nav-number">4.2.</span> <span class="nav-text">空间离散</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型构建的一些概念"><span class="nav-number">5.</span> <span class="nav-text">模型构建的一些概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Part-零件"><span class="nav-number">5.1.</span> <span class="nav-text">Part - 零件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Component-部件"><span class="nav-number">5.2.</span> <span class="nav-text">Component - 部件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Model-模型"><span class="nav-number">5.3.</span> <span class="nav-text">Model - 模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂模型构建"><span class="nav-number">5.4.</span> <span class="nav-text">复杂模型构建</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fuyude</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        },
+        "HTML-CSS":{
+        	scale: 85
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,260 @@
+
+
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+  <title>运算符 - python | 思谬雷神</title>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+</head>
+
+<body lang="zh-Hans">
+
+ <div style="width:300px;">目录</div>
+ <div style="width:auto">
+ 
+
+  <article>
+
+    
+    	运算符
+    	<hr>
+    	<p>在编程语言中，一条语句通常由操作数和运算符构成。比如1+2=3，1和2被称为操作数，+被称为运算符。Python支持的运算符包括：</p>
+<ul>
+<li>算数运算符</li>
+<li>关系运算符</li>
+<li>赋值运算符</li>
+<li>逻辑运算符</li>
+<li>位运算符</li>
+<li>成员运算符</li>
+<li>身份运算符</li>
+<li>运算符优先级</li>
+</ul>
+<a id="more"></a>
+<h1 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h1><p>算术运算符包括</p>
+<ul>
+<li><code>+</code> 加 两个数相加 1+2=3</li>
+<li><code>-</code> 减 得到负数或两数相减 -1 ，2-1=1</li>
+<li><code>*</code> 乘 两数相乘或返回被重复若干次的字符串 2*3=6 </li>
+<li><code>/</code> 除 两数相除 2/4=0.5</li>
+<li><code>%</code> 取模 返回余数 5%2=1</li>
+<li><code>**</code> 幂 返回幂次 2**3=8</li>
+<li><code>//</code> 取整除 2/4=0</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">a=<span class="number">19</span>;b=<span class="number">2</span>;</div><div class="line"></div><div class="line">print(a,<span class="string">'+'</span>,b,<span class="string">'='</span>,a+b)</div><div class="line">print(a,<span class="string">'-'</span>,b,<span class="string">'='</span>,a-b)</div><div class="line">print(a,<span class="string">'*'</span>,b,<span class="string">'='</span>,a*b)</div><div class="line">print(a,<span class="string">'/'</span>,b,<span class="string">'='</span>,a/b)</div><div class="line">print(a,<span class="string">'%'</span>,b,<span class="string">'='</span>,a%b)</div><div class="line">print(a,<span class="string">'**'</span>,b,<span class="string">'='</span>,a**b)</div><div class="line">print(a,<span class="string">'//'</span>,b,<span class="string">'='</span>,a//b)</div></pre></td></tr></table></figure>
+<p>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">19 + 2 = 21</div><div class="line">19 - 2 = 17</div><div class="line">19 * 2 = 38</div><div class="line">19 / 2 = 9.5</div><div class="line">19 % 2 = 1</div><div class="line">19 ** 2 = 361</div><div class="line">19 // 2 = 9</div></pre></td></tr></table></figure></p>
+<h1 id="关系-比较-运算符"><a href="#关系-比较-运算符" class="headerlink" title="关系(比较)运算符"></a>关系(比较)运算符</h1><p>关系运算符主要用来比较两个对象是否相等、大于、小于等关系。</p>
+<ul>
+<li><code>==</code> 等于，比较两个对象是否相等</li>
+<li><code>!=</code> 不等于，比较两个对象是否不相等</li>
+<li><code>&gt;</code> 大于</li>
+<li><code>&lt;</code> 小于</li>
+<li><code>&gt;=</code> 大于等于</li>
+<li><code>&lt;=</code> 小于等于</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">a=<span class="number">19</span>;b=<span class="number">2</span>;</div><div class="line"></div><div class="line">print(a,<span class="string">'=='</span>,b,<span class="string">'\t'</span>,a==b)</div><div class="line">print(a,<span class="string">'!='</span>,b,<span class="string">'\t'</span>,a!=b)</div><div class="line">print(a,<span class="string">'&gt;'</span>,b,<span class="string">' \t'</span>,a&gt;b)</div><div class="line">print(a,<span class="string">'&lt;'</span>,b,<span class="string">' \t'</span>,a&lt;b)</div><div class="line">print(a,<span class="string">'&gt;='</span>,b,<span class="string">'\t'</span>,a&gt;=b)</div><div class="line">print(a,<span class="string">'&lt;='</span>,b,<span class="string">'\t'</span>,a&lt;=b)</div></pre></td></tr></table></figure>
+<p>输出结果：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="number">19</span> == <span class="number">2</span>          <span class="keyword">False</span></div><div class="line"><span class="number">19</span> != <span class="number">2</span>          <span class="keyword">True</span></div><div class="line"><span class="number">19</span> &gt; <span class="number">2</span>           <span class="keyword">True</span></div><div class="line"><span class="number">19</span> &lt; <span class="number">2</span>           <span class="keyword">False</span></div><div class="line"><span class="number">19</span> &gt;= <span class="number">2</span>          <span class="keyword">True</span></div><div class="line"><span class="number">19</span> &lt;= <span class="number">2</span>          <span class="keyword">False</span></div></pre></td></tr></table></figure></p>
+<h1 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h1><p>赋值运算符用来给变量赋值。</p>
+<ul>
+<li><code>=</code> 等于赋值</li>
+<li><code>+=</code> 加法赋值</li>
+<li><code>-=</code> 减法赋值</li>
+<li><code>*=</code> 乘法赋值</li>
+<li><code>/=</code> 除法赋值</li>
+<li><code>%=</code> 取模赋值</li>
+<li><code>**=</code> 幂赋值</li>
+<li><code>//=</code>取整除赋值</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>a=<span class="number">3</span>;b=<span class="number">4</span>;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c=a+b</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c</div><div class="line"><span class="number">7</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c=<span class="number">5</span>;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c+=a</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c</div><div class="line"><span class="number">8</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c=<span class="number">5</span>;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c-=a</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c</div><div class="line"><span class="number">2</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c=<span class="number">5</span>;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c*=a</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c</div><div class="line"><span class="number">15</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c=<span class="number">5</span>;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c/=a</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c</div><div class="line"><span class="number">1.6666666666666667</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c=<span class="number">5</span>;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c%=a</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c</div><div class="line"><span class="number">2</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c=<span class="number">5</span>;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c**=a</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c</div><div class="line"><span class="number">125</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c=<span class="number">5</span>;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c//=a</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c</div><div class="line"><span class="number">1</span></div></pre></td></tr></table></figure>
+<h1 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h1><p>位运算符把数字看作二进制来进行计算。Python中的位运算法则如下。</p>
+<p><strong>下表中a假设为60(0011 1100)，b为13(0000 1101)。</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>&amp;</code></td>
+<td>位与运算符。如果两个相应的位都为1，则该位为1，否则为0</td>
+<td>(a &amp; b)=12 ，即 0000 1100</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>&amp;#124;</code></td>
+<td>·</td>
+<td>·</td>
+</tr>
+</tbody>
+</table>
+
+    
+
+
+ </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        },
+        "HTML-CSS":{
+        	scale: 85
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

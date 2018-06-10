@@ -1,0 +1,981 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="教程," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="问题描述本文采用LS-DYNA计算了一个刚性弹丸侵彻问题，目标靶采用SPH算法。 计算环境12345678操作系统：Windows 7 旗舰版 64-bit (6.1, Build 7601) Service Pack 1 (7601.win7sp1_ldr.170913-0600)处理器：Intel(R) Core(TM) i5-4590 CPU @ 3.30GHz (4 CPUs), ~3.3">
+<meta name="keywords" content="教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="弹丸侵彻SPH靶板">
+<meta property="og:url" content="http://www.liguyu.com/Lsdyna/弹丸侵彻SPH靶板.html">
+<meta property="og:site_name" content="思谬雷神">
+<meta property="og:description" content="问题描述本文采用LS-DYNA计算了一个刚性弹丸侵彻问题，目标靶采用SPH算法。 计算环境12345678操作系统：Windows 7 旗舰版 64-bit (6.1, Build 7601) Service Pack 1 (7601.win7sp1_ldr.170913-0600)处理器：Intel(R) Core(TM) i5-4590 CPU @ 3.30GHz (4 CPUs), ~3.3">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/qidong.PNG">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/dysf.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/clmx.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/yuan.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/juxing.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/glu.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/xz.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/wg1.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/wg2.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/meshtool.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/mesh.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/move.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/k.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/log.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/openk.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/createbox.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/setdb1.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/setdb2.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/setdb3.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/setctr1.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/setctr2.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/setctr3.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/setctr4.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/SPHSP.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/sphnodeset.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/setctc.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/sphsec.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/setv.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/setcs.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/savek.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/qiujie.png">
+<meta property="og:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/vm.png">
+<meta property="og:updated_time" content="2018-06-10T03:57:44.369Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="弹丸侵彻SPH靶板">
+<meta name="twitter:description" content="问题描述本文采用LS-DYNA计算了一个刚性弹丸侵彻问题，目标靶采用SPH算法。 计算环境12345678操作系统：Windows 7 旗舰版 64-bit (6.1, Build 7601) Service Pack 1 (7601.win7sp1_ldr.170913-0600)处理器：Intel(R) Core(TM) i5-4590 CPU @ 3.30GHz (4 CPUs), ~3.3">
+<meta name="twitter:image" content="http://www.liguyu.com/images/lsdyna/2018-6-4/qidong.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.liguyu.com/Lsdyna/弹丸侵彻SPH靶板.html"/>
+
+
+
+
+
+  <title>弹丸侵彻SPH靶板 | 思谬雷神</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9381cbecd4d412f6d5de68d452e9d16d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">思谬雷神</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">好好学习、天天向上</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.liguyu.com/Lsdyna/弹丸侵彻SPH靶板.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fuyude">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://or2avyamu.bkt.clouddn.com/2017/06/07/e78ce763be3dabdec1ba4934e1a4e09b.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="思谬雷神">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">弹丸侵彻SPH靶板</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-04T21:56:39+08:00">
+                2018-06-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/lsdyna/" itemprop="url" rel="index">
+                    <span itemprop="name">lsdyna</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/lsdyna/ansys/" itemprop="url" rel="index">
+                    <span itemprop="name">ansys</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/lsdyna/ansys/数值模拟/" itemprop="url" rel="index">
+                    <span itemprop="name">数值模拟</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-bar-chart"></i> 已阅读
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计 </span>
+                
+                <span title="字数统计">
+                  1,538 个
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  约 6 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>本文采用<code>LS-DYNA</code>计算了一个刚性弹丸侵彻问题，目标靶采用<code>SPH</code>算法。</p>
+<h2 id="计算环境"><a href="#计算环境" class="headerlink" title="计算环境"></a>计算环境</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">操作系统：Windows 7 旗舰版 64-bit (6.1, Build 7601) Service Pack 1 (7601.win7sp1_ldr.170913-0600)</div><div class="line">处理器：Intel(R) Core(TM) i5-4590 CPU @ 3.30GHz (4 CPUs), ~3.3GHz</div><div class="line">内存：12288MB RAM</div><div class="line">前处理：ANSYS 18.0</div><div class="line">求解器：LS-DYNA smp s R8.1.0</div><div class="line">后处理：LSPREPOST</div><div class="line">单位系：cm g μs</div><div class="line">计算用时：7 minutes 10 seconds using 1 SMP thread</div></pre></td></tr></table></figure>
+<h1 id="建立模型"><a href="#建立模型" class="headerlink" title="建立模型"></a>建立模型</h1><h2 id="启动ANSYS"><a href="#启动ANSYS" class="headerlink" title="启动ANSYS"></a>启动ANSYS</h2><p>打开<code>Mechanical APDL Product Launcher</code>，设置求解环境为<code>ANSYS</code>，<code>License</code>为<code>ANSYS Mechanical/LS-DYNA</code>，并设定工作目录为<code>XX\弹丸侵彻SPH靶板</code>，<code>Job Name</code>为<code>Model</code>，然后点击<code>RUN</code>启动<code>ANSYS</code>。</p>
+<p><img src="\images\lsdyna\2018-6-4\qidong.PNG" alt="启动" title="启动ANSYS"></p>
+<h2 id="设定单元算法"><a href="#设定单元算法" class="headerlink" title="设定单元算法"></a>设定单元算法</h2><p>依次点击<code>Preprocessor</code>-&gt;<code>Element Type</code>-&gt;<code>Add/Edit/Delete</code>-&gt;<code>Add</code>-&gt;<code>LS-DYNA Explicit</code>-&gt;<code>3D Solid 164</code>，选择三维固体164单元。</p>
+<p><img src="\images\lsdyna\2018-6-4\dysf.png" alt="" title="选择3D 164单元"></p>
+<a id="more"></a>
+<h2 id="添加材料模型"><a href="#添加材料模型" class="headerlink" title="添加材料模型"></a>添加材料模型</h2><p>这里只需要随意选用一种材料作为弹体材料模型，设定任意材料参数，具体真实参数在后处理中添加。靶板采用SPH方法，在<code>LS-Prepost</code>中建模。</p>
+<p>具体步骤为：依次点击<code>Material Props</code>-&gt;<code>Material Models</code>-&gt;<code>LS-DYNA</code>-&gt;<code>Linear</code>-&gt;<code>Elastic</code>-&gt;<code>Isotropic</code>，设置密度为7850、杨氏模量为210E9、泊松比为0.3。</p>
+<p><img src="\images\lsdyna\2018-6-4\clmx.png" alt="" title="弹体材料模型"></p>
+<h2 id="建立弹丸模型"><a href="#建立弹丸模型" class="headerlink" title="建立弹丸模型"></a>建立弹丸模型</h2><p>首先采用<code>Circle</code>的<code>By Dimensions</code>方法建立1/4圆，然后采用<code>Rectangle</code>的<code>By Dimensions</code>方法建立矩形，并将两个面粘合。将该面旋转90°即可生成弹体1/4模型。</p>
+<p>1、依次点击<code>Modeling</code>-&gt;<code>Create</code>-&gt;<code>Areas</code>-&gt;<code>Circle</code>-&gt;<code>By Dimensions</code>，并设圆的半径为1.3，创建1/4圆。</p>
+<p><img src="\images\lsdyna\2018-6-4\yuan.png" alt="" title="创建1/4圆"></p>
+<p>2、依次点击<code>Modeling</code>-&gt;<code>Create</code>-&gt;<code>Areas</code>-&gt;<code>Rectangle</code>-&gt;<code>By Dimensions</code>，并设矩形两个角点的坐标分别为<code>(0,0) , (-2.6,1.3)</code>，创建矩形。</p>
+<p><img src="\images\lsdyna\2018-6-4\juxing.png" alt="" title="创建矩形"></p>
+<p>3、依次点击<code>Modeling</code>-&gt;<code>Booleans</code>-&gt;<code>Glue</code>-&gt;<code>Areas</code>-&gt;<code>Pick All</code>，将连个面粘合在一起。</p>
+<p><img src="\images\lsdyna\2018-6-4\glu.png" alt="" title="粘合成一个面"></p>
+<p>4、依次点击<code>Modeling</code>-&gt;<code>Operate</code>-&gt;<code>Extrude</code>-&gt;<code>Areas</code>-&gt;<code>About Axis</code>-&gt;<code>Pick All</code>-&gt;<code>关键点1和4</code>-&gt;<code>OK</code>，并设置旋转角度为90，生成体，即弹体的1/4模型。</p>
+<p><img src="\images\lsdyna\2018-6-4\xz.png" alt="" title="通过旋转生成体"></p>
+<p>5、设置网格控制。依次点击<code>Meshing</code>-&gt;<code>Size Cntrls</code>-&gt;<code>Manual Size</code>-&gt;<code>Picked Lines</code>，然后选中图中高亮的三条线，点击<code>OK</code>，设置<code>NDIV</code>为20，取消<code>KYNDIV</code>，然后确认。这就将这三条线等分为20。</p>
+<p><img src="\images\lsdyna\2018-6-4\wg1.png" alt="" title="等分3条线"></p>
+<p>6、采用同样的方法将其余线等分为10。</p>
+<p><img src="\images\lsdyna\2018-6-4\wg2.png" alt="" title="等分其余线"></p>
+<p>7、划分网格。点击<code>MeshTool</code>打开网格划分工具。点击<code>Set</code>，设置要填充的体采用1号材料模型等。选择<code>Mesh</code>的形状为<code>Hex(六面体)</code>，方法为<code>Mapped(映射)</code>，点击<code>Mesh</code>按钮，然后选择<code>Pick All</code>，完成网格划分。</p>
+<p><img src="\images\lsdyna\2018-6-4\meshtool.png" alt="" title="选择材料和单元算法"></p>
+<p><img src="\images\lsdyna\2018-6-4\mesh.png" alt="" title="网格生成"></p>
+<p>8、将弹体沿x轴反向移动1.5。依次点击<code>Modeling</code>-&gt;<code>Move/Modify</code>-&gt;<code>Volumes</code>-&gt;<code>Pick All</code>，按照下图设置，然后确认。</p>
+<p><img src="\images\lsdyna\2018-6-4\move.png" alt="" title="向后移动1.5"></p>
+<p>9、保存模型文件。点击<code>Solution</code>进入求解器。点击<code>Write Jobname.k</code>，设置保存文件类型为<code>LS-DYNA</code>，文件名为<code>danti.k</code>，然后点击<code>OK</code>，这就将生成的模型数据保存为<code>LS-DYNA</code>计算所需格式。由于没有设置求解时间等参数，此时会报错，点击<code>Proceed</code>忽略这些错误。</p>
+<p><img src="\images\lsdyna\2018-6-4\k.png" alt="" title="弹体k文件生成"></p>
+<p>进入<code>File</code>菜单，点击<code>Write DB log file</code>，按照下图设置后点击<code>OK</code>。保存建模过程的log文件。利用命令流文件可以非常方便的修改模型。</p>
+<p><img src="\images\lsdyna\2018-6-4\log.png" alt="" title="保存log命令流"></p>
+<h2 id="创建靶板SPH模型"><a href="#创建靶板SPH模型" class="headerlink" title="创建靶板SPH模型"></a>创建靶板SPH模型</h2><p>采用<code>LS-Prepost</code>建立靶板SPH模型。</p>
+<p>1、打开<code>LS-Prepost</code>软件，点击<code>File</code>-&gt;<code>Import</code>-&gt;<code>LS-DYNA Keywords File</code>，选择刚才建立的模型，将其导入。</p>
+<p><img src="\images\lsdyna\2018-6-4\openk.png" alt="" title="打开k文件"></p>
+<p>2、建立SPH靶板模型。选择第7页操作面板的<code>SphGen</code>命令，选中<code>Create</code>，选择方法为<code>Box</code>，按照下图，设置坐标及其它参数，点击<code>Apply</code>-&gt;<code>Accept</code>，完成靶板模型建立。</p>
+<p><img src="\images\lsdyna\2018-6-4\createbox.png" alt="" title="生成SPH靶板"></p>
+<p>3、完成相关关键字及材料参数的设置</p>
+<ul>
+<li>定义计算结果输出控制关键字参数。<ul>
+<li>定义<code>*DATABASE_FORMAT</code>（计算结果输出格式）。选择第3页操作面板的<code>*Dbase</code>命令，选中<code>FORMAT</code>后点击<code>Edit</code>按钮，打开输入面板，按下图设置相关参数后点击<code>Accept</code>-&gt;<code>Done</code>。<br><img src="\images\lsdyna\2018-6-4\setdb1.png" alt="" title="设置DATABASE_FORMAT"></li>
+<li>采用相同方法，按照下图参数设置<code>*DATABASE_EXTENT_BINARY</code>和<code>*DATABASE_BINARY_D3PLOT</code>。<br><img src="\images\lsdyna\2018-6-4\setdb2.png" alt="" title="设置DATABASE_EXTENT_BINARY"><br><img src="\images\lsdyna\2018-6-4\setdb3.png" alt="" title="设置DATABASE_BINARY_D3PLOT"></li>
+</ul>
+</li>
+<li>定义<code>*CONTROL</code>相关关键字参数。<ul>
+<li>采用相同方法，按照下图参数设置<code>*CONTROL_CONTACT</code>、<code>*CONTROL_ENERGY</code>、<code>*CONTROL_SPH</code>和<code>*CONTROL_TERMINATION</code>。<br><img src="\images\lsdyna\2018-6-4\setctr1.png" alt="" title="设置CONTROL_CONTACT"><br><img src="\images\lsdyna\2018-6-4\setctr2.png" alt="" title="设置CONTROL_ENERGY"><br><img src="\images\lsdyna\2018-6-4\setctr3.png" alt="" title="设置CONTROL_SPH"><br><img src="\images\lsdyna\2018-6-4\setctr4.png" alt="" title="设置CONTROL_TERMINATION"></li>
+</ul>
+</li>
+<li>设置SPH 边界<code>*BOUNDARY_SPH_SYMMETRY_PLANE</code>。<br>  <img src="\images\lsdyna\2018-6-4\SPHSP.png" alt="" title="定义两个SPH对称面"></li>
+<li>定义接触<em>CONTACT，定义接触前，需要先生成SPH的`</em>SET_NODE`。<ul>
+<li>定义SPH节点集。选择第1页操作面板的<code>Selpart</code>命令，选中<code>2 SphNode</code>让<code>LSPP</code>只显示<code>SPH</code>。选择第5页操作面板的<code>SetD</code>命令，选中<code>Create</code>-&gt;<code>SET_NODE</code>，在坐下面板将选择方式改为<code>Area</code>，用鼠标框选整个SPH模型，最后点击<code>Apply</code>就会生成SPH的<code>*SET_NODE</code>。<br><img src="\images\lsdyna\2018-6-4\sphnodeset.png" alt="" title="生成SPH NodeSet"></li>
+<li>利用<code>*CONTACT_ERODING_NODES_TO_SURFACE</code>定义点面侵蚀接触。依次点击<code>*Contact</code>-&gt;<code>All</code>-&gt;<code>ERODING_NODES_TO_SURFACE</code>，然后按照下图所示设置参数后点击<code>Accept</code>完成接触设置。<br><img src="\images\lsdyna\2018-6-4\setctc.png" alt="" title="定义SPH-靶接触"></li>
+</ul>
+</li>
+<li>添加SPH单元算法。依次点击<code>3</code>-&gt;<code>*Section</code>-&gt;<code>All</code>-&gt;<code>SPH</code>，然后输入如下参数后，<code>Accept</code>完成SPH单元算法添加。<br>  <img src="\images\lsdyna\2018-6-4\sphsec.png" alt="" title="添加SPH算法"></li>
+</ul>
+<h1 id="定义初始速度"><a href="#定义初始速度" class="headerlink" title="定义初始速度"></a>定义初始速度</h1><p>依次点击<code>3</code>-&gt;<code>*Initial</code>-&gt;<code>VELOCITY_GENERATION</code>，然后输入如下参数后，<code>Accept</code>完成速度添加。<br><img src="\images\lsdyna\2018-6-4\setv.png" alt="" title="定义初始速度"></p>
+<h1 id="定义对称边界约束"><a href="#定义对称边界约束" class="headerlink" title="定义对称边界约束"></a>定义对称边界约束</h1><p>依次点击<code>3</code>-&gt;<code>*Cnstrnd</code>-&gt;<code>Global</code>-&gt;<code>Edit</code>，然后输入如下参数后，<code>Accept</code>完成对称边界定义。<br><img src="\images\lsdyna\2018-6-4\setcs.png" alt="" title="定义对称边界约束"></p>
+<h1 id="保存K文件"><a href="#保存K文件" class="headerlink" title="保存K文件"></a>保存K文件</h1><p><img src="\images\lsdyna\2018-6-4\savek.png" alt="" title="保存修改过的K文件"></p>
+<h1 id="修改K文件"><a href="#修改K文件" class="headerlink" title="修改K文件"></a>修改K文件</h1><p>目前建立的计算文件的材料模型还没有完善。用如下文件替换相应关键字完成K文件最后修缮。</p>
+<figure class="highlight k"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">*MAT_RIGID</div><div class="line">         <span class="number">1</span>  <span class="number">8.930000</span>  <span class="number">1.170000</span>  <span class="number">0.350000</span>     <span class="number">0.000</span>     <span class="number">0.000</span>     <span class="number">0.000</span>    </div><div class="line">     <span class="number">0.000</span>         <span class="number">0</span>         <span class="number">0</span></div><div class="line">     <span class="number">0.000</span>     <span class="number">0.000</span>     <span class="number">0.000</span>     <span class="number">0.000</span>     <span class="number">0.000</span>     <span class="number">0.000</span></div><div class="line">*MAT_JOHNSON_COOK</div><div class="line">         <span class="number">2</span>  <span class="number">7.830000</span>  <span class="number">0.770000</span>     <span class="number">0.000</span>     <span class="number">0.000</span>     <span class="number">0.000</span>     <span class="number">0.000</span></div><div class="line">  <span class="number">0.007920</span>  <span class="number">0.005100</span>  <span class="number">0.260000</span>  <span class="number">0.014000</span>  <span class="number">1.030000</span> <span class="number">1793.0000</span> <span class="number">294.00000</span> <span class="number">1.0000E-6</span></div><div class="line"> <span class="number">4.7700E-6</span> <span class="number">-9.000000</span>  <span class="number">3.000000</span>     <span class="number">0.000</span>  <span class="number">0.800000</span>     <span class="number">0.000</span>     <span class="number">0.000</span>     <span class="number">0.000</span></div><div class="line">     <span class="number">0.000</span></div><div class="line">*EOS_GRUNEISEN</div><div class="line">         <span class="number">2</span>  <span class="number">0.456900</span>  <span class="number">1.490000</span>     <span class="number">0.000</span>     <span class="number">0.000</span>  <span class="number">2.170000</span>  <span class="number">0.460000</span>     <span class="number">0.000</span></div><div class="line">  <span class="number">1.000000</span></div><div class="line">*PART</div><div class="line">SphNode</div><div class="line">         <span class="number">2</span>         <span class="number">2</span>         <span class="number">2</span>         <span class="number">2</span>         <span class="number">0</span>         <span class="number">0</span>         <span class="number">0</span>         <span class="number">0</span></div></pre></td></tr></table></figure>
+<h1 id="求解"><a href="#求解" class="headerlink" title="求解"></a>求解</h1><p>打开<code>Mechanical APDL Product Launcher</code>，设置求解环境为<code>LS-DYNA Solver</code>，<code>License</code>为<code>ANSYS Mechanical/LS-DYNA</code>，并设定工作目录为<code>XX\弹丸侵彻SPH靶板</code>，打开关键字输入文件，然后点击<code>RUN</code>开始求解计算。</p>
+<p><img src="\images\lsdyna\2018-6-4\qiujie.png" alt="" title="开始计算"></p>
+<blockquote>
+<p>也可以采用<code>cmd</code>命令文件执行。新建一个文本文件，输入<code>&quot;E:\Program Files\ANSYS Inc\v191\ANSYS\bin\winx64\LSDYNA191.exe&quot; I=SPHImpact.k Memory=2000000000</code>，保存然后改文件名为<code>run.cmd</code>，双击即可进行<code>Ls-dyna</code>计算。</p>
+</blockquote>
+<h1 id="计算结果"><a href="#计算结果" class="headerlink" title="计算结果"></a>计算结果</h1><p>弹丸穿透了SPH靶，应力云图如下。</p>
+<p><img src="\images\lsdyna\2018-6-4\vm.png" alt="" title="等效应力云图"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div><b>您的支持将鼓励我继续创作！</b></div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赞赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wx.png" alt="fuyude WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/zfb.png" alt="fuyude Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+
+      
+    </div>
+
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:14px;padding-bottom:1em;">
+ --------------------------- 本文结束，谢谢阅读 ---------------------------
+</div> 
+<div style="border-bottom: 1px solid black;border-top: 1px solid black"> 
+  <div style="margin-left:10px;margin-right:10px"> 
+  <p style="text-align:center;font-weight:blod;margin:0px;color:red;">版权声明</p> 
+  <p style="text-indent:2em;margin:0px; font-size: 10px;line-height: 30px"> 由<a href="http://www.liguyu.com" style="color:#258FC6">fuyude</a>创作并维护的<a href="http://www.liguyu.com" style="color:#258FC6">思谬雷神</a>博客采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。本文首发于<a href="http://www.liguyu.com" style="color:#258FC6">思谬雷神</a> 博客，版权所有，侵权必究。</p>
+  <p style="text-indent:2em;margin:0px; font-size: 10px;line-height: 30px">需要本文涉及到的建模或计算文件，或<b>探讨相关计算问题</b>，请在下方留言或通过184596664#qq.com联系。</p>
+  <p style="text-indent:2em;margin:0px; font-size: 10px;line-height: 30px">如果本文对您有所帮助，欢迎转载或赏我一杯咖啡。</p>
+  <p style="text-indent:2em;margin:0px; font-size: 10px;line-height: 30px">本文首发于<a href='http://www.liguyu.com/Lsdyna/弹丸侵彻SPH靶板.html'>http://www.liguyu.com/Lsdyna/弹丸侵彻SPH靶板.html</a></p> 
+  </div> 
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/教程/" rel="tag"># 教程</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Mechanical/MechanicsNouns.html" rel="next" title="力学名词">
+                <i class="fa fa-chevron-left"></i> 力学名词
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNzAyMC8xMzU1Ng=="></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://or2avyamu.bkt.clouddn.com/2017/06/07/e78ce763be3dabdec1ba4934e1a4e09b.JPG"
+               alt="fuyude" />
+          <p class="site-author-name" itemprop="name">fuyude</p>
+           
+              <p class="site-description motion-element" itemprop="description">数值模拟实例、教程</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#计算环境"><span class="nav-number">1.1.</span> <span class="nav-text">计算环境</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#建立模型"><span class="nav-number">2.</span> <span class="nav-text">建立模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#启动ANSYS"><span class="nav-number">2.1.</span> <span class="nav-text">启动ANSYS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设定单元算法"><span class="nav-number">2.2.</span> <span class="nav-text">设定单元算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加材料模型"><span class="nav-number">2.3.</span> <span class="nav-text">添加材料模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立弹丸模型"><span class="nav-number">2.4.</span> <span class="nav-text">建立弹丸模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建靶板SPH模型"><span class="nav-number">2.5.</span> <span class="nav-text">创建靶板SPH模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定义初始速度"><span class="nav-number">3.</span> <span class="nav-text">定义初始速度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定义对称边界约束"><span class="nav-number">4.</span> <span class="nav-text">定义对称边界约束</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#保存K文件"><span class="nav-number">5.</span> <span class="nav-text">保存K文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改K文件"><span class="nav-number">6.</span> <span class="nav-text">修改K文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#求解"><span class="nav-number">7.</span> <span class="nav-text">求解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算结果"><span class="nav-number">8.</span> <span class="nav-text">计算结果</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fuyude</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        },
+        "HTML-CSS":{
+        	scale: 85
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1405 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="autodyn,实例," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="苏打罐的压垮模拟 本文采用WorkBench的Explicit Dynamics和autodyn模块对苏打罐的压垮进行了模拟仿真。  Workbench中的Explicit Dynamics模块是由AUTODYN传承演化过来的，当然到目前为止，还没有100%的继承，估计有些功能要留待于未来的版本继续完善了，不但能够解决固体相互作用的显式动力分析（拉格朗日算法），也能够做流体的模拟（欧拉算法）。 如">
+<meta name="keywords" content="autodyn,实例">
+<meta property="og:type" content="article">
+<meta property="og:title" content="autodyn实例">
+<meta property="og:url" content="http://www.liguyu.com/autodyn/autodyn实例.html">
+<meta property="og:site_name" content="思谬雷神">
+<meta property="og:description" content="苏打罐的压垮模拟 本文采用WorkBench的Explicit Dynamics和autodyn模块对苏打罐的压垮进行了模拟仿真。  Workbench中的Explicit Dynamics模块是由AUTODYN传承演化过来的，当然到目前为止，还没有100%的继承，估计有些功能要留待于未来的版本继续完善了，不但能够解决固体相互作用的显式动力分析（拉格朗日算法），也能够做流体的模拟（欧拉算法）。 如">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-c872beaacdc0b806.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-069318b9a84853c6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-9dbf31c42551e97d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-9c3c1b62a3978422.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-ce8198079abeec7e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-89b34d0488cb03b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-bbde2dfc56af5c7e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-e61d376656f9db7d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-35be726ed6ce3824.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-32d795a5d9b1914b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-bd1bf9bd421f4fc7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-46015a85d372b025.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-9c6752002ba6773c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-e7fae966b016c24d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-71c78caca93d8535.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-4653a84c95508ae3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-c0628a73b5154e16.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-322196dede31e03c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-80c00ef614e988e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-f539a20fdab7f61f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-9d1ed61c312ae28a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-c2fea089daa7593f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-90398332e6250040.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/840">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-213f9d83b2fad0c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-6cd2123de9dc41fd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-6cce3a5c8e7a631d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-cdfa79db22e76035.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-be43412f8aa687bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-cc0af8ef1d58032b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-4c463e05235ec11a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-8ebe8cd74c8d179d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-40ca5dd2162f87cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-5771cf814ac7f82b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-3159b2e5fc7057fe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-f901082a09b04ce1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-7f594cb20cf3e213.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-f29d0f7f7f226aae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-a61b5ed4c35cc55e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-ce0ea345135d07fc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-b955714f4daeebec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-c2156e9cdfeda05a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-ca1926ba015f384e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-51dbadfa4707fde5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-4b58c010bf80b70c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-23063b9033489613.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-c79a8b5729a9f6b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-2bc4251034aebc1c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-c74fa47bafe7aaf6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-f22401b321c7f60f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-0530198d80e05756.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-8d8759274469d488.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-a5a1f118dafb7725.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-2ccf592fee8d06b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-e44dd73a82a06421.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-2eff043d03b24a26.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-48b78725630e0cd3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-9a8442530648d7d7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-8ab1781003d3d471.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-f4e4d0c31b6510be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-a7e560f20defb4a7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-1a80474599211910.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-d045996a9750f7a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-ca7ef200182c582e.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-04d238edeafd03df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-cf97cd15244352a3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1188301-32f3cf21765cb125.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-06-08T09:42:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="autodyn实例">
+<meta name="twitter:description" content="苏打罐的压垮模拟 本文采用WorkBench的Explicit Dynamics和autodyn模块对苏打罐的压垮进行了模拟仿真。  Workbench中的Explicit Dynamics模块是由AUTODYN传承演化过来的，当然到目前为止，还没有100%的继承，估计有些功能要留待于未来的版本继续完善了，不但能够解决固体相互作用的显式动力分析（拉格朗日算法），也能够做流体的模拟（欧拉算法）。 如">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1188301-c872beaacdc0b806.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.liguyu.com/autodyn/autodyn实例.html"/>
+
+
+
+
+
+  <title>autodyn实例 | 思谬雷神</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9381cbecd4d412f6d5de68d452e9d16d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">思谬雷神</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">好好学习、天天向上</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.liguyu.com/autodyn/autodyn实例.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fuyude">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://or2avyamu.bkt.clouddn.com/2017/06/07/e78ce763be3dabdec1ba4934e1a4e09b.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="思谬雷神">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">autodyn实例</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-06T14:07:12+08:00">
+                2017-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/autodyn/" itemprop="url" rel="index">
+                    <span itemprop="name">autodyn</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-bar-chart"></i> 已阅读
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计 </span>
+                
+                <span title="字数统计">
+                  3,726 个
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  约 14 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="苏打罐的压垮模拟"><a href="#苏打罐的压垮模拟" class="headerlink" title="苏打罐的压垮模拟"></a>苏打罐的压垮模拟</h1><blockquote>
+<p>本文采用<code>WorkBench</code>的<code>Explicit Dynamics</code>和<code>autodyn</code>模块对苏打罐的压垮进行了模拟仿真。</p>
+<blockquote>
+<p><code>Workbench</code>中的<code>Explicit Dynamics</code>模块是由<code>AUTODYN</code>传承演化过来的，当然到目前为止，还没有100%的继承，估计有些功能要留待于未来的版本继续完善了，不但能够解决固体相互作用的显式动力分析（拉格朗日算法），也能够做流体的模拟（欧拉算法）。</p>
+<p>如果你觉得<code>Explicit Dynamics</code>这个模块还不够完善，你还可以直接使用 <code>AUTODYN</code>来解决你的问题。</p>
+</blockquote>
+<p>本文主要参考<strong> <code>ANSYS Autodyn 简介II Crush of Filled Soda Can</code> </strong></p>
+</blockquote>
+<h2 id="目标和过程"><a href="#目标和过程" class="headerlink" title="目标和过程"></a>目标和过程</h2><h3 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h3><p>铝制饮料罐的压垮模拟</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-c872beaacdc0b806.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="计算模型"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-069318b9a84853c6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="计算结果"></p>
+<h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><ul>
+<li>创建一个显式动力学分析系统</li>
+<li>输入苏打罐模型，并划分网格</li>
+<li>设置计算选项和边界条件</li>
+<li>实施计算并观察结果</li>
+</ul>
+<h2 id="创建工程"><a href="#创建工程" class="headerlink" title="创建工程"></a>创建工程</h2><p>打开<code>workbench</code>软件。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-9dbf31c42551e97d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Workbench界面"></p>
+<p>通过双击<strong><code>Explicit Dynamics</code></strong>，创建一个显式动力学分析系统</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-9c3c1b62a3978422.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="创建显式动力学分析系统"></p>
+<h2 id="定义材料模型"><a href="#定义材料模型" class="headerlink" title="定义材料模型"></a>定义材料模型</h2><ul>
+<li>双击<strong>Engineering Data</strong></li>
+<li>选择最后一个空行，依次添加下面的材料<ul>
+<li>Soda_Can</li>
+<li>Water</li>
+<li>Soda_Can_Failure</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-ce8198079abeec7e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="添加材料模型"></p>
+<p>拖动并将下列物理属性放置到指定的材料模型中。</p>
+<ul>
+<li><p>Soda_Can 和 Soda_Can_Failure</p>
+<ul>
+<li>密度 Density</li>
+<li>各向同性弹性 Isotropic Elasticity</li>
+<li>双线性各向同性硬化模型  Bilinear Isotropic Hardening </li>
+</ul>
+</li>
+<li><p>Soda_Can_Failure</p>
+<ul>
+<li>塑性应变失效 Plastic Strain Failure </li>
+</ul>
+</li>
+<li><p>Water</p>
+<ul>
+<li>密度 Density</li>
+<li>各向同性弹性 Isotropic Elasticity</li>
+</ul>
+</li>
+</ul>
+<p><strong>Soda_Can模型参数</strong><br><img src="http://upload-images.jianshu.io/upload_images/1188301-89b34d0488cb03b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Soda_Can材料模型数据"></p>
+<p><strong>Soda_Can_Failure模型参数</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-bbde2dfc56af5c7e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Soda_Can_Failure模型参数"></p>
+<p><strong>Water模型参数</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-e61d376656f9db7d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Water模型参数"></p>
+<p>返回项目概览页，并保存项目为crush_soda_can 。</p>
+<h2 id="导入几何模型"><a href="#导入几何模型" class="headerlink" title="导入几何模型"></a>导入几何模型</h2><p>右键单击<strong>Geometry</strong>，导入几何模型<code>filled_soda_can.agdb</code>。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-35be726ed6ce3824.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="导入几何模型"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-32d795a5d9b1914b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="导入filled_soda_can"></p>
+<p>右键单击<strong>Model</strong>，然后选择<strong>Edit</strong>，进入Mechanical模块。<br><img src="http://upload-images.jianshu.io/upload_images/1188301-bd1bf9bd421f4fc7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="进入Mechanical"></p>
+<p>为<code>Soda</code>、<code>Punch</code>和<code>Die</code>定义属性。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-46015a85d372b025.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Soda定义为Eulerian，材料Water"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-9c6752002ba6773c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Punch和Die设置为Rigid"></p>
+<p>为<code>Soda Can</code>定义属性。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-e7fae966b016c24d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="定义Soda Can的厚度和材料等"></p>
+<p>选择<code>Body Interactions</code>，设置壳厚度因子<code>Shell Thickness Factor</code>为1.0。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-71c78caca93d8535.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="设置体接触"></p>
+<p>右键单击<code>Mesh</code>，选择<code>Generate Mesh</code>来生成网格。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-4653a84c95508ae3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="生成网格"></p>
+<p>选择<code>Analysis Settings</code>，然后</p>
+<ul>
+<li>将计算结束时间设置为<code>6.0E-4s</code>。</li>
+<li>将<code>Scope</code>改变为只对欧拉体(<code>Eulerian Bodies only</code>)，没有必要将欧拉网格扩展到<code>punch</code>和<code>die</code>。</li>
+<li>将总单元从250000缩小为25000，这是一个简单模型，不需要特别精细的欧拉网格。</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-c0628a73b5154e16.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="设置计算选项"></p>
+<h2 id="定义边界条件"><a href="#定义边界条件" class="headerlink" title="定义边界条件"></a>定义边界条件</h2><p>右键单击<code>Explicit Dynamics -&gt; Insert -&gt; Fixed Support</code>，为<code>Die</code>添加固支边界条件。</p>
+<p>右键单击<code>Explicit Dynamics -&gt; Insert -&gt; Displacement</code>，为<code>Punch</code>添加位移边界条件，并按照下图进行设置。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-322196dede31e03c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="添加位移边界条件"></p>
+<h2 id="定义结果输出"><a href="#定义结果输出" class="headerlink" title="定义结果输出"></a>定义结果输出</h2><p>在<code>Solution</code>上右键单击，插入需要的输出项目。比如</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-80c00ef614e988e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="输出x轴的速度"></p>
+<h2 id="执行计算"><a href="#执行计算" class="headerlink" title="执行计算"></a>执行计算</h2><p>保存项目，并开始计算。</p>
+<blockquote>
+<p>这个时候容易产生<code>a general error has occured</code>问题，从而不能进行计算。这一般是由于Windows防火墙或者杀毒软件阻止了Workbench各模块之间的通信引起的。关闭杀毒软件或者防火墙，或者将Workbench相关端口设置为例外，可避免该问题。</p>
+</blockquote>
+<p>通过计算可以得到如下计算结果，仿真图像与实际是比较相符合的。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-f539a20fdab7f61f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="计算结果"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-9d1ed61c312ae28a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="通过此窗口观察变化过程"></p>
+<h2 id="导入到autodyn中计算"><a href="#导入到autodyn中计算" class="headerlink" title="导入到autodyn中计算"></a>导入到autodyn中计算</h2><p>如果需要将模型导入到autodyn 中计算，请按照一下步骤操作。</p>
+<ul>
+<li>回到项目主页面。</li>
+<li>从左侧选择<code>component system</code>中选择<code>Autodyn</code>，并将其拖动到<code>Explicit Dynamics</code>中的<code>Setup</code>格。</li>
+<li>会自动生成Autodyn需要的数据，然后右键单击<code>Autodyn</code>模块的<code>Setup</code>，打开<code>Autodyn</code>界面。</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-c2fea089daa7593f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="导入Autodyn"></p>
+<p>然后点击<code>RUN</code>直接运行计算即可。从下图可以看出两者的计算结果基本一致（<em>因为两者基于同样的计算模块，这也在情理之中</em>）。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-90398332e6250040.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/840" alt="Autodyn计算结果"></p>
+<h1 id="混凝土爆炸破坏模拟"><a href="#混凝土爆炸破坏模拟" class="headerlink" title="混凝土爆炸破坏模拟"></a>混凝土爆炸破坏模拟</h1><blockquote>
+<p>本文采用<code>WorkBench</code>的<code>autodyn</code>模块对混凝土爆炸破坏进行了模拟仿真。</p>
+<p>本文主要参考<strong> <code>ANSYS Autodyn 简介II Explosive Demolition of Concrete</code> </strong></p>
+</blockquote>
+<h2 id="目标和过程-1"><a href="#目标和过程-1" class="headerlink" title="目标和过程"></a>目标和过程</h2><p>对混凝土板的爆炸破坏进行模拟。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-213f9d83b2fad0c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="混凝土板爆炸破坏模拟"></p>
+<ul>
+<li>打开<code>AUTODYN</code></li>
+<li>设置为二维轴对称模拟</li>
+<li>对混凝土采用Lagrange建模</li>
+<li>对爆炸物采用Euler建模</li>
+<li>添加Euler/Lagrange相互作用</li>
+<li>计算</li>
+</ul>
+<h2 id="第一步：打开AUTODYN"><a href="#第一步：打开AUTODYN" class="headerlink" title="第一步：打开AUTODYN"></a>第一步：打开AUTODYN</h2><p>按照类似如下路径，双击<code>autodyn.exe</code>打开软件。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-6cd2123de9dc41fd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="路径"></p>
+<h2 id="第二步：新建工程"><a href="#第二步：新建工程" class="headerlink" title="第二步：新建工程"></a>第二步：新建工程</h2><ul>
+<li>通过<code>File-&gt;New</code>或者快捷键新建一个新工程。</li>
+<li>指定一个文件夹作为该工程文件存放地。</li>
+<li>标识(<code>Ident</code>)设置为<code>explosive_demolition</code>。</li>
+<li>标题设置为<code>Explosive Demolition of a Concrete Slab</code>。</li>
+<li>对称选择<code>2D</code>，<code>Axial</code>(轴对称)。</li>
+<li>单位采用默认的 <code>mm ms g</code>。</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-6cce3a5c8e7a631d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="新建工程"></p>
+<h2 id="第三步：从数据库提取材料模型"><a href="#第三步：从数据库提取材料模型" class="headerlink" title="第三步：从数据库提取材料模型"></a>第三步：从数据库提取材料模型</h2><p>选中<code>Materials</code>，点击<code>Load</code>，并选择一下材料模型。</p>
+<ul>
+<li>AIR</li>
+<li>CONC-35MPA</li>
+<li>TNT</li>
+</ul>
+<blockquote>
+<p>Tips： 按住<code>Ctrl</code>可以同时选择多个模型</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-cdfa79db22e76035.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="选择材料"></p>
+<h2 id="第四步：改进混凝土模型"><a href="#第四步：改进混凝土模型" class="headerlink" title="第四步：改进混凝土模型"></a>第四步：改进混凝土模型</h2><p>通过增加拉伸断裂与裂纹软化改善混凝土模型</p>
+<ul>
+<li>选择<code>CONC-35MPA</code></li>
+<li>点击<code>Modify</code></li>
+<li>在拉伸断裂选项中选择<code>Principal Stress</code>，输入“5.0e3”作为拉伸破坏主应力</li>
+<li>打开裂纹软化选项<code>Crack Softening</code>并输入“100.0”做为断裂能量</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-be43412f8aa687bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="改进混凝土模型"></p>
+<h2 id="第五步：创建空气初始条件"><a href="#第五步：创建空气初始条件" class="headerlink" title="第五步：创建空气初始条件"></a>第五步：创建空气初始条件</h2><ul>
+<li>在左侧导航栏选择<code>Init. Cond.</code></li>
+<li>在对话面板上点击<code>New</code></li>
+<li>设置初始条件名为<code>Atmos</code></li>
+<li>选中<code>Include Material</code>,并选择材料为<code>AIR</code></li>
+<li>设置内能为<code>2.068e5</code>,这将初始化空气的压力为1个大气压</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-cc0af8ef1d58032b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="创建空气初始条件"></p>
+<h2 id="第六步：定义流出边界条件"><a href="#第六步：定义流出边界条件" class="headerlink" title="第六步：定义流出边界条件"></a>第六步：定义流出边界条件</h2><ul>
+<li>在左侧导航栏上点击<code>Navigation Bar</code></li>
+<li>单击<code>New</code>来定义一个边界条件</li>
+<li>输入名称为<code>Outflow</code></li>
+<li>选择<code>Flow_out</code>和<code>Flowout (Euler)</code></li>
+<li>对首选材料(<code>Preferred Material</code>)选择ALL EQUAL（对于运输，HE和Air具有相同的优先权）</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-4c463e05235ec11a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="定义边界条件"></p>
+<h2 id="第七步：创建Structure部件"><a href="#第七步：创建Structure部件" class="headerlink" title="第七步：创建Structure部件"></a>第七步：创建Structure部件</h2><ul>
+<li>在左侧导航栏上点击<code>Parts</code></li>
+<li>点击<code>New</code></li>
+<li>设置部件名称为<code>Structure</code></li>
+<li>选中<code>Lagrange</code>求解器</li>
+<li>点击<code>Next</code></li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-8ebe8cd74c8d179d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="创建Structure部件"></p>
+<h2 id="第八步：定义Structure部件的几何尺寸"><a href="#第八步：定义Structure部件的几何尺寸" class="headerlink" title="第八步：定义Structure部件的几何尺寸"></a>第八步：定义Structure部件的几何尺寸</h2><ul>
+<li>选择<code>Box</code>（默认）</li>
+<li>设置矩形原点为<code>(0.0,0.0)</code>，宽和高分别为<code>(500.0,1000.0)</code></li>
+<li>进入下一步</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-40ca5dd2162f87cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="矩形设置"></p>
+<h2 id="第九步：指定Structure部件的网格并填充"><a href="#第九步：指定Structure部件的网格并填充" class="headerlink" title="第九步：指定Structure部件的网格并填充"></a>第九步：指定Structure部件的网格并填充</h2><ul>
+<li>将I和J，即X和Y方向的网格数设置为50和100</li>
+<li>进入下一步</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-5771cf814ac7f82b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="设置网格"></p>
+<ul>
+<li>不要选中<code>Fill with Initial Condition Set</code></li>
+<li>选择材料为<code>CONC-35MPA</code>  </li>
+<li>完成</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-3159b2e5fc7057fe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="填充"></p>
+<p>目前生成的模型如下</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-f901082a09b04ce1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Structure部件"></p>
+<h2 id="第十步：为爆炸物创建Euler部件"><a href="#第十步：为爆炸物创建Euler部件" class="headerlink" title="第十步：为爆炸物创建Euler部件"></a>第十步：为爆炸物创建Euler部件</h2><ul>
+<li>在导航栏上点击<code>Parts</code></li>
+<li>点击<code>New</code>创建新部件</li>
+<li>定义名称为<code>Blast</code></li>
+<li>选择<code>Euler, 2D MultiMaterial</code>求解器</li>
+<li>点击<code>Next</code>，进入下一步</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-7f594cb20cf3e213.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="创建Blast部件"></p>
+<h2 id="第十一步：设置Blast部件的几何尺寸"><a href="#第十一步：设置Blast部件的几何尺寸" class="headerlink" title="第十一步：设置Blast部件的几何尺寸"></a>第十一步：设置Blast部件的几何尺寸</h2><ul>
+<li>选择<code>Box</code>(默认)</li>
+<li>设置矩形的原点为<code>(-800.0,0.0)</code>，宽和高为<code>(1400,1000)</code></li>
+<li>点击<code>Next</code>，进入下一步</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-f29d0f7f7f226aae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="设置Blast尺寸"></p>
+<h2 id="第十二步：划分网格并填充Blast"><a href="#第十二步：划分网格并填充Blast" class="headerlink" title="第十二步：划分网格并填充Blast"></a>第十二步：划分网格并填充Blast</h2><ul>
+<li>设置I和J方向的网格数分别为140和100</li>
+<li>进入下一步</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-a61b5ed4c35cc55e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="设置Blast网格"></p>
+<ul>
+<li>选中<code>Fill with InitialCondition Set</code>，使用唯一的<code>Atmos</code>填充</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-ce0ea345135d07fc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="填充Blast"></p>
+<blockquote>
+<p>这会将Blast部件全部填充为1个大气压的空气，TNT部分将在随后加入。</p>
+</blockquote>
+<h2 id="第十三步-为Blast部件填充TNT"><a href="#第十三步-为Blast部件填充TNT" class="headerlink" title="第十三步 为Blast部件填充TNT"></a>第十三步 为Blast部件填充TNT</h2><ul>
+<li>选中<code>Blast</code>部件</li>
+<li>点击<code>Fill</code></li>
+<li>点击<code>Ellipse</code>来填充一个圆形区域</li>
+<li>将椭圆的中心设置为<code>(-200,0)</code>，x和y半径设置为200</li>
+<li>选择<code>TNT</code>材料</li>
+<li>完成</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-b955714f4daeebec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="填充TNT"></p>
+<h2 id="第十四步：检查模型"><a href="#第十四步：检查模型" class="headerlink" title="第十四步：检查模型"></a>第十四步：检查模型</h2><ul>
+<li>在左侧导航栏点击<code>Plots</code></li>
+<li>选择<code>Fill type</code>为<code>Material Location</code></li>
+<li>点击箭头，选中<code>Smooth multi-materials</code></li>
+<li>如果想查看网格，选中右侧的<code>Grid</code>选项。</li>
+</ul>
+<p>目前模型如图所示。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-c2156e9cdfeda05a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="完整的模型"></p>
+<blockquote>
+<p>请注意，欧拉爆炸部分与拉格朗日结构部分重叠。这是在整个动态分析中允许有效的欧拉-拉格朗日耦合所必需的。</p>
+</blockquote>
+<h2 id="第十五步：应用流出边界条件"><a href="#第十五步：应用流出边界条件" class="headerlink" title="第十五步：应用流出边界条件"></a>第十五步：应用流出边界条件</h2><ul>
+<li>选择<code>Parts</code>，选中<code>Blast</code></li>
+<li>选择<code>Boundary</code></li>
+<li>点击<code>I Line</code>，输入<code>I=1,J=1-101</code>，完成</li>
+<li>点击<code>I Line</code>，输入<code>I=141,J=1-101</code>，完成</li>
+<li>点击<code>J Line</code>，输入<code>I=1-141,J=101</code>，完成</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-ca1926ba015f384e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="应用流出边界条件"></p>
+<h2 id="第十六步：设置Lagrange-Lagrange接触"><a href="#第十六步：设置Lagrange-Lagrange接触" class="headerlink" title="第十六步：设置Lagrange-Lagrange接触"></a>第十六步：设置Lagrange-Lagrange接触</h2><ul>
+<li>点击<code>Interaction</code></li>
+<li>默认为Lagrange/Lagrange接触</li>
+<li>选中<code>External Gap</code></li>
+<li>点击<code>Calculate</code>，AUTODYN计算得到建议的间隙尺寸为1.0mm(单元尺寸的1/10)</li>
+<li>其它选项保持默认值</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-51dbadfa4707fde5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Lagrange-Lagrange接触"></p>
+<h2 id="第十七步：设置Euler-Lagrange耦合"><a href="#第十七步：设置Euler-Lagrange耦合" class="headerlink" title="第十七步：设置Euler-Lagrange耦合"></a>第十七步：设置Euler-Lagrange耦合</h2><ul>
+<li>点击<code>Interaction</code></li>
+<li>选择<code>Euler/Lagrange</code></li>
+<li>选择<code>Automatic(polygon free)</code>作为耦合类型</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-4b58c010bf80b70c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Euler-Lagrange耦合"></p>
+<h2 id="第十八步：设置起爆点"><a href="#第十八步：设置起爆点" class="headerlink" title="第十八步：设置起爆点"></a>第十八步：设置起爆点</h2><ul>
+<li>点击<code>Detonation</code></li>
+<li>单击<code>Point</code></li>
+<li>设置起爆点的位置为<code>(-200,0)</code></li>
+<li>完成</li>
+<li>选中<code>Plot detonation points</code>来观察起爆点位置</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-23063b9033489613.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="设置起爆点"></p>
+<h2 id="第十九步：设置求解和输出控制项"><a href="#第十九步：设置求解和输出控制项" class="headerlink" title="第十九步：设置求解和输出控制项"></a>第十九步：设置求解和输出控制项</h2><ul>
+<li>选择<code>Controls</code></li>
+<li>设置<code>Cycle limit</code>为足够大的值，<code>End time</code>为0.3</li>
+<li>选择<code>Output</code></li>
+<li><p>设置输出间隔为<code>0.01ms</code></p>
+</li>
+<li><p>选择<code>Plots</code>，选中<code>Rotate</code>和<code>180 deg</code>，将模型映射到三维</p>
+</li>
+</ul>
+<h2 id="第二十步：计算模型并观察结果"><a href="#第二十步：计算模型并观察结果" class="headerlink" title="第二十步：计算模型并观察结果"></a>第二十步：计算模型并观察结果</h2><ul>
+<li>保存模型</li>
+<li>点击<code>Run</code>，开始计算</li>
+</ul>
+<p>计算结果如下图所示。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-c79a8b5729a9f6b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="混凝土计算结果，damage云图"></p>
+<h1 id="二维破片撞击的Autodyn模拟"><a href="#二维破片撞击的Autodyn模拟" class="headerlink" title="二维破片撞击的Autodyn模拟"></a>二维破片撞击的Autodyn模拟</h1><blockquote>
+<p>采用<code>Autodyn</code>模拟一个多材料圆柱形碎片撞击板现象。</p>
+</blockquote>
+<p><strong>主要过程</strong></p>
+<ol>
+<li>打开<code>AUTODYN</code></li>
+<li>用二维轴对称建立模型</li>
+<li>求解并观察结果</li>
+<li>生成动画</li>
+</ol>
+<h2 id="打开AUTODYN"><a href="#打开AUTODYN" class="headerlink" title="打开AUTODYN"></a>打开AUTODYN</h2><p>双击<code>autodyn.exe</code>打开AUTODYN。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-2bc4251034aebc1c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="AUTODYN界面"></p>
+<h2 id="新建一个项目"><a href="#新建一个项目" class="headerlink" title="新建一个项目"></a>新建一个项目</h2><ol>
+<li>新建项目</li>
+<li>浏览并选择一个文件夹</li>
+<li>输入标识<code>fragment_impact</code>和标题</li>
+<li>选择<code>2D Axial</code>，即二维轴对称</li>
+<li>保持默认的单位系统(可保证精度)</li>
+<li>确认</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-c74fa47bafe7aaf6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="新建项目"></p>
+<h2 id="设置材料模型数据"><a href="#设置材料模型数据" class="headerlink" title="设置材料模型数据"></a>设置材料模型数据</h2><ol>
+<li>加载材料数据</li>
+<li>从材料数据库中选择以下材料(<strong>按住<code>Ctrl</code>可一次选择多个材料模型</strong>)<ul>
+<li>铝 AL 7039</li>
+<li>铜 COPPER(Shock,Piecewise JC)</li>
+<li>铁 Steel 1006</li>
+<li>钽 Tantalum(Shock, von Mises)</li>
+</ul>
+</li>
+<li>确认</li>
+</ol>
+<h2 id="为材料添加侵蚀模型"><a href="#为材料添加侵蚀模型" class="headerlink" title="为材料添加侵蚀模型"></a>为材料添加侵蚀模型</h2><p>为每一种材料添加侵蚀模型。</p>
+<ol>
+<li>选择一个材料</li>
+<li>点击<code>Modify</code>来修改模型</li>
+<li>选择<code>Geometric Strain(几何应变)</code>侵蚀模型</li>
+<li>设置侵蚀应变为<code>2.0(即200%)</code></li>
+<li>设置几何应变判据类型为瞬态<code>Instantaneous</code></li>
+<li>完成</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-f22401b321c7f60f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="为`Tantalum`添加侵蚀模型"></p>
+<h2 id="添加破片速度条件"><a href="#添加破片速度条件" class="headerlink" title="添加破片速度条件"></a>添加破片速度条件</h2><ol>
+<li>在导航条中选择<code>Init. Cond.</code>，添加初始条件</li>
+<li>单击<code>New</code></li>
+<li>设置初始条件名称为<code>frag_vel</code></li>
+<li>由于该条件要应用到多个材料，保持<code>Velocity Only</code>选中</li>
+<li>设置x轴速度为<code>2000</code>，<strong>在AUTODYN中，<code>X轴</code>总是对称轴</strong></li>
+<li>完成</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-0530198d80e05756.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="速度初始条件"></p>
+<h2 id="添加破片部件"><a href="#添加破片部件" class="headerlink" title="添加破片部件"></a>添加破片部件</h2><ol>
+<li>在导航条上点击<code>Parts</code></li>
+<li>单击<code>New</code>添加新部件</li>
+<li>名称<code>fragment</code></li>
+<li>保持默认的<code>Lagrange</code>求解器</li>
+<li>保持默认向导生成方式</li>
+<li>下一步</li>
+<li>选择<code>Box</code></li>
+<li>依次输入<code>-40.0 0.0 40.0 10.0</code></li>
+<li>下一步</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-8d8759274469d488.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<ol>
+<li>设置I(X) 和 J(Y)方向的网格数为40和10</li>
+<li>下一步</li>
+<li>选中<code>Fill with Initial Condition Set</code>，唯一的<code>frag_vel</code>被选中</li>
+<li>选择<code>AL 7039</code>材料。<em>暂时将整个破片用铝填充，后面将用其它材料重新填充</em><br>14 完成</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-a5a1f118dafb7725.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="用铝填充整个部件"></p>
+<h2 id="检查已生成部件"><a href="#检查已生成部件" class="headerlink" title="检查已生成部件"></a>检查已生成部件</h2><ol>
+<li>单击<code>Plots</code></li>
+<li>设置<code>Fill Type</code>为默认的<code>Material Location</code></li>
+<li>在<code>Additional Components</code>下选中<code>Vectors</code>来观察速度矢量</li>
+<li>在<code>Additional Components</code>下选中<code>Grid</code>来观察网格</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-2ccf592fee8d06b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="观察已生成部件"></p>
+<h2 id="用铜填充部件的一部分"><a href="#用铜填充部件的一部分" class="headerlink" title="用铜填充部件的一部分"></a>用铜填充部件的一部分</h2><ol>
+<li>选择<code>Parts</code>卡片</li>
+<li>单击<code>Fill</code></li>
+<li>选择<code>Block</code>以在索引空间中填充一个块</li>
+<li>输入索引范围<ul>
+<li>I=1-41</li>
+<li>J=9-11</li>
+</ul>
+</li>
+<li>选择<code>Fill with Initial Condition Set</code>用初始条件填充</li>
+<li>选择<code>COPPER</code>为所用材料</li>
+<li>完成</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-e44dd73a82a06421.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="用铜填充部分部件"></p>
+<h2 id="用钽填充破片芯"><a href="#用钽填充破片芯" class="headerlink" title="用钽填充破片芯"></a>用钽填充破片芯</h2><ol>
+<li>选择<code>Parts</code>卡片</li>
+<li>单击<code>Fill</code></li>
+<li>选择<code>Block</code>以在索引空间中填充一个块</li>
+<li>输入索引范围<ul>
+<li>I=11-31</li>
+<li>J=1-6</li>
+</ul>
+</li>
+<li>选择<code>Fill with Initial Condition Set</code>用初始条件填充</li>
+<li>选择<code>TANTALUM</code>为所用材料</li>
+<li>完成</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-2eff043d03b24a26.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="最终的破片模型"></p>
+<h2 id="创建目标靶部件"><a href="#创建目标靶部件" class="headerlink" title="创建目标靶部件"></a>创建目标靶部件</h2><ol>
+<li>在导航条上点击<code>Parts</code></li>
+<li>单击<code>New</code>添加新部件</li>
+<li>名称<code>plate</code></li>
+<li>保持默认的<code>Lagrange</code>求解器</li>
+<li>保持默认向导生成方式</li>
+<li>下一步</li>
+<li>选择<code>Box</code></li>
+<li>依次输入<code>0.0 0.0 30.0 120.0</code></li>
+<li>下一步</li>
+<li>设置I(X) 和 J(Y)方向的网格数为30和60，选中<code>Grade zoning in J direction</code>，设置<code>fixed size</code>为1.0，<code>Times</code>为10，并选中<code>Lower J</code></li>
+<li>下一步</li>
+<li><strong>不要</strong>选中<code>Fill with Initial Condition Set</code>，该部件没有初始速度</li>
+<li>选择<code>STEEL 1006</code>材料。<br>14 完成</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-48b78725630e0cd3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="检查模型"></p>
+<blockquote>
+<p>目标靶径向10个单元应该和破片的大小完全一致。其它单元的大小应该随着半径增大而平滑增加。</p>
+</blockquote>
+<h2 id="设置部件间的接触"><a href="#设置部件间的接触" class="headerlink" title="设置部件间的接触"></a>设置部件间的接触</h2><ol>
+<li>在导航条上点击<code>Interaction</code></li>
+<li><code>External Gap</code>是结构部件唯一可选项</li>
+<li>计算间隙值(AUTODYN会计算推荐的间隙值并显示)</li>
+<li>点击<code>check</code>，检查间隙值是否有效<strong>并且所有部件初始状态下都由缝隙值分开</strong>。<em>这时会得到一个错误：破片和目标靶之间的间隔小于缝隙值，它们是接触上的</em></li>
+</ol>
+<h2 id="将破片和目标靶分隔开"><a href="#将破片和目标靶分隔开" class="headerlink" title="将破片和目标靶分隔开"></a>将破片和目标靶分隔开</h2><ol>
+<li>在导航条上点击<code>Parts</code></li>
+<li>选择<code>Plate</code>部件</li>
+<li>选择<code>Zoning</code></li>
+<li>选择<code>Transformations</code>下的<code>Translate</code></li>
+<li>设置x方向移动<code>0.1</code></li>
+<li>完成</li>
+</ol>
+<p>这样就将<code>Plate</code>部件与<code>Fragment</code>部件用间隙值分隔开了。返回到接触菜单，再次运行<code>check</code>，会发现接触定义成功。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-9a8442530648d7d7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="设置接触"></p>
+<h2 id="定义目标靶夹紧边界条件"><a href="#定义目标靶夹紧边界条件" class="headerlink" title="定义目标靶夹紧边界条件"></a>定义目标靶夹紧边界条件</h2><ol>
+<li>在导航条上选择<code>Boundaries</code>，进入边界条件定义</li>
+<li>点击<code>New</code>定义一个新的边界条件</li>
+<li>设置边界条件名称为<code>Clamp</code></li>
+<li>选择<code>Velocity</code>-&gt;<code>General 2D Velocity</code>类型</li>
+<li>设置<code>X</code>和<code>Y</code>分量都为<code>0.0</code></li>
+<li>完成</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-8ab1781003d3d471.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="设置边界条件"></p>
+<h2 id="应用边界条件"><a href="#应用边界条件" class="headerlink" title="应用边界条件"></a>应用边界条件</h2><ol>
+<li>在导航条上点击<code>Parts</code></li>
+<li>选择<code>Plate</code>部件</li>
+<li>点击<code>Boundary</code></li>
+<li>点击<code>J Line</code></li>
+<li>输入<code>I=1-31</code>，<code>J=61</code></li>
+<li>选择<code>Clamp</code>边界条件</li>
+<li>完成</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-f4e4d0c31b6510be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="应用边界条件"></p>
+<h2 id="设置计算和输出控制"><a href="#设置计算和输出控制" class="headerlink" title="设置计算和输出控制"></a>设置计算和输出控制</h2><ol>
+<li>在导航条上点击<code>Controls</code></li>
+<li>在循环限制出输入一个很大的值，时间限制为<code>0.07</code></li>
+<li>在导航条上点击<code>Output</code></li>
+<li>设置保存时间间隔为<code>0.002</code>ms</li>
+<li>点击<code>Plots</code>，选中<code>Rotate</code>并设置角度为270°。</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-a7e560f20defb4a7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="最终计算模型"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-1a80474599211910.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="计算结果"></p>
+<h2 id="生成动画"><a href="#生成动画" class="headerlink" title="生成动画"></a>生成动画</h2><ol>
+<li>选择<code>Plots</code></li>
+<li>在工具栏里点击<img src="http://upload-images.jianshu.io/upload_images/1188301-d045996a9750f7a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><code>Capture sequence</code></li>
+<li>选择所有的结果</li>
+<li>点击<code>Start</code>，然后就会生成<code>GIF</code>图像</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-ca7ef200182c582e.gif?imageMogr2/auto-orient/strip" alt="结果动画"></p>
+<h1 id="容器的跌落测试"><a href="#容器的跌落测试" class="headerlink" title="容器的跌落测试"></a>容器的跌落测试</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>参考<code>ANSYS Autodyn 简介</code>，采用<code>WorkBench</code>的<code>Explicit Dynamics</code>对一个装水的容器跌落到固壁上进行模拟。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-04d238edeafd03df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="装水容器跌落模拟"></p>
+<p><strong>主要步骤</strong> </p>
+<ol>
+<li>导入模型</li>
+<li>设置材料</li>
+<li>打开Mechanical模块</li>
+<li>划分网格</li>
+<li>应用初始条件</li>
+<li>求解</li>
+</ol>
+<h2 id="导入模型"><a href="#导入模型" class="headerlink" title="导入模型"></a>导入模型</h2><p>打开<code>ansys workbench</code>，新建一个<code>Explicit Dynamics</code>算例。导入模型<code>filled_container.agdb</code>。</p>
+<p>打开材料编辑，从<code>Explicit Dynamics material</code>数据源中添加<code>Air(Atmospheric)</code>和<code>Water</code>材料，保留默认的<code>Structural Steel</code>。设置水的剪切模量为0。</p>
+<blockquote>
+<p><code>Explicit Dynamics material</code>就是<code>autodyn</code>自带的材料库。</p>
+</blockquote>
+<h2 id="编辑模型"><a href="#编辑模型" class="headerlink" title="编辑模型"></a>编辑模型</h2><p>进入<code>Mechanical</code>模块，设置<code>Bottle</code>体的厚度为0.003m。设置<code>Ground</code>体的刚度行为为<code>Rigid</code>。将<code>Air</code>材料和<code>Water</code>材料分别应用于空气和水。将空气和水的<code>参考框架(Reference Frame)</code>设置为<code>Euler(Virtual)</code>。</p>
+<p>删除所有自动生成的接触。</p>
+<p>设置单元最大/最小尺寸为0.025m，划分网格。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-cf97cd15244352a3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="划分网格"></p>
+<p>设置<code>Bottle</code>, <code>Air</code>和<code>Water</code>的x方向初始速度为25m/s，对体<code>Ground</code>设置固定约束。</p>
+<h2 id="求解"><a href="#求解" class="headerlink" title="求解"></a>求解</h2><p>设置计算总时间为0.01s。</p>
+<p>设置<code>Reference Energy Cycle</code>为99999。</p>
+<p>设置Euler域网格共有50000个。</p>
+<p>对水添加一个<code>总速度</code>结果，添加其它想观察的结果。</p>
+<p>计算并观察结果。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1188301-32f3cf21765cb125.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="容器受力云图"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div><b>您的支持将鼓励我继续创作！</b></div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赞赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wx.png" alt="fuyude WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/zfb.png" alt="fuyude Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+
+      
+    </div>
+
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:14px;padding-bottom:1em;">
+ --------------------------- 本文结束，谢谢阅读 ---------------------------
+</div> 
+<div style="border-bottom: 1px solid black;border-top: 1px solid black"> 
+  <div style="margin-left:10px;margin-right:10px"> 
+  <p style="text-align:center;font-weight:blod;margin:0px;color:red;">版权声明</p> 
+  <p style="text-indent:2em;margin:0px; font-size: 10px;line-height: 30px"> 由<a href="http://www.liguyu.com" style="color:#258FC6">fuyude</a>创作并维护的<a href="http://www.liguyu.com" style="color:#258FC6">思谬雷神</a>博客采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。本文首发于<a href="http://www.liguyu.com" style="color:#258FC6">思谬雷神</a> 博客，版权所有，侵权必究。</p>
+  <p style="text-indent:2em;margin:0px; font-size: 10px;line-height: 30px">需要本文涉及到的建模或计算文件，或<b>探讨相关计算问题</b>，请在下方留言或通过184596664#qq.com联系。</p>
+  <p style="text-indent:2em;margin:0px; font-size: 10px;line-height: 30px">如果本文对您有所帮助，欢迎转载或赏我一杯咖啡。</p>
+  <p style="text-indent:2em;margin:0px; font-size: 10px;line-height: 30px">本文首发于<a href='http://www.liguyu.com/autodyn/autodyn实例.html'>http://www.liguyu.com/autodyn/autodyn实例.html</a></p> 
+  </div> 
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/autodyn/" rel="tag"># autodyn</a>
+          
+            <a href="/tags/实例/" rel="tag"># 实例</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/autodyn/autodyn基础教程-简介.html" rel="prev" title="autodyn基础教程-简介">
+                autodyn基础教程-简介 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNzAyMC8xMzU1Ng=="></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://or2avyamu.bkt.clouddn.com/2017/06/07/e78ce763be3dabdec1ba4934e1a4e09b.JPG"
+               alt="fuyude" />
+          <p class="site-author-name" itemprop="name">fuyude</p>
+           
+              <p class="site-description motion-element" itemprop="description">数值模拟实例、教程</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#苏打罐的压垮模拟"><span class="nav-number">1.</span> <span class="nav-text">苏打罐的压垮模拟</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#目标和过程"><span class="nav-number">1.1.</span> <span class="nav-text">目标和过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#目标"><span class="nav-number">1.1.1.</span> <span class="nav-text">目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过程"><span class="nav-number">1.1.2.</span> <span class="nav-text">过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建工程"><span class="nav-number">1.2.</span> <span class="nav-text">创建工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义材料模型"><span class="nav-number">1.3.</span> <span class="nav-text">定义材料模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入几何模型"><span class="nav-number">1.4.</span> <span class="nav-text">导入几何模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义边界条件"><span class="nav-number">1.5.</span> <span class="nav-text">定义边界条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义结果输出"><span class="nav-number">1.6.</span> <span class="nav-text">定义结果输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行计算"><span class="nav-number">1.7.</span> <span class="nav-text">执行计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入到autodyn中计算"><span class="nav-number">1.8.</span> <span class="nav-text">导入到autodyn中计算</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#混凝土爆炸破坏模拟"><span class="nav-number">2.</span> <span class="nav-text">混凝土爆炸破坏模拟</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#目标和过程-1"><span class="nav-number">2.1.</span> <span class="nav-text">目标和过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一步：打开AUTODYN"><span class="nav-number">2.2.</span> <span class="nav-text">第一步：打开AUTODYN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二步：新建工程"><span class="nav-number">2.3.</span> <span class="nav-text">第二步：新建工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三步：从数据库提取材料模型"><span class="nav-number">2.4.</span> <span class="nav-text">第三步：从数据库提取材料模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四步：改进混凝土模型"><span class="nav-number">2.5.</span> <span class="nav-text">第四步：改进混凝土模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五步：创建空气初始条件"><span class="nav-number">2.6.</span> <span class="nav-text">第五步：创建空气初始条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六步：定义流出边界条件"><span class="nav-number">2.7.</span> <span class="nav-text">第六步：定义流出边界条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第七步：创建Structure部件"><span class="nav-number">2.8.</span> <span class="nav-text">第七步：创建Structure部件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第八步：定义Structure部件的几何尺寸"><span class="nav-number">2.9.</span> <span class="nav-text">第八步：定义Structure部件的几何尺寸</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第九步：指定Structure部件的网格并填充"><span class="nav-number">2.10.</span> <span class="nav-text">第九步：指定Structure部件的网格并填充</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十步：为爆炸物创建Euler部件"><span class="nav-number">2.11.</span> <span class="nav-text">第十步：为爆炸物创建Euler部件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十一步：设置Blast部件的几何尺寸"><span class="nav-number">2.12.</span> <span class="nav-text">第十一步：设置Blast部件的几何尺寸</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十二步：划分网格并填充Blast"><span class="nav-number">2.13.</span> <span class="nav-text">第十二步：划分网格并填充Blast</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十三步-为Blast部件填充TNT"><span class="nav-number">2.14.</span> <span class="nav-text">第十三步 为Blast部件填充TNT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十四步：检查模型"><span class="nav-number">2.15.</span> <span class="nav-text">第十四步：检查模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十五步：应用流出边界条件"><span class="nav-number">2.16.</span> <span class="nav-text">第十五步：应用流出边界条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十六步：设置Lagrange-Lagrange接触"><span class="nav-number">2.17.</span> <span class="nav-text">第十六步：设置Lagrange-Lagrange接触</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十七步：设置Euler-Lagrange耦合"><span class="nav-number">2.18.</span> <span class="nav-text">第十七步：设置Euler-Lagrange耦合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十八步：设置起爆点"><span class="nav-number">2.19.</span> <span class="nav-text">第十八步：设置起爆点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十九步：设置求解和输出控制项"><span class="nav-number">2.20.</span> <span class="nav-text">第十九步：设置求解和输出控制项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二十步：计算模型并观察结果"><span class="nav-number">2.21.</span> <span class="nav-text">第二十步：计算模型并观察结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二维破片撞击的Autodyn模拟"><span class="nav-number">3.</span> <span class="nav-text">二维破片撞击的Autodyn模拟</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#打开AUTODYN"><span class="nav-number">3.1.</span> <span class="nav-text">打开AUTODYN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新建一个项目"><span class="nav-number">3.2.</span> <span class="nav-text">新建一个项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置材料模型数据"><span class="nav-number">3.3.</span> <span class="nav-text">设置材料模型数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为材料添加侵蚀模型"><span class="nav-number">3.4.</span> <span class="nav-text">为材料添加侵蚀模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加破片速度条件"><span class="nav-number">3.5.</span> <span class="nav-text">添加破片速度条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加破片部件"><span class="nav-number">3.6.</span> <span class="nav-text">添加破片部件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检查已生成部件"><span class="nav-number">3.7.</span> <span class="nav-text">检查已生成部件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用铜填充部件的一部分"><span class="nav-number">3.8.</span> <span class="nav-text">用铜填充部件的一部分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用钽填充破片芯"><span class="nav-number">3.9.</span> <span class="nav-text">用钽填充破片芯</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建目标靶部件"><span class="nav-number">3.10.</span> <span class="nav-text">创建目标靶部件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置部件间的接触"><span class="nav-number">3.11.</span> <span class="nav-text">设置部件间的接触</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将破片和目标靶分隔开"><span class="nav-number">3.12.</span> <span class="nav-text">将破片和目标靶分隔开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义目标靶夹紧边界条件"><span class="nav-number">3.13.</span> <span class="nav-text">定义目标靶夹紧边界条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用边界条件"><span class="nav-number">3.14.</span> <span class="nav-text">应用边界条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置计算和输出控制"><span class="nav-number">3.15.</span> <span class="nav-text">设置计算和输出控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成动画"><span class="nav-number">3.16.</span> <span class="nav-text">生成动画</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#容器的跌落测试"><span class="nav-number">4.</span> <span class="nav-text">容器的跌落测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">4.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入模型"><span class="nav-number">4.2.</span> <span class="nav-text">导入模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编辑模型"><span class="nav-number">4.3.</span> <span class="nav-text">编辑模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#求解"><span class="nav-number">4.4.</span> <span class="nav-text">求解</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fuyude</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        },
+        "HTML-CSS":{
+        	scale: 85
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
